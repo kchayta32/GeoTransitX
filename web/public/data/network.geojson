@@ -1,0 +1,159 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "RD-01",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.9532,
+            13.2305
+          ],
+          [
+            100.9541,
+            13.2316
+          ],
+          [
+            100.9548,
+            13.2323
+          ],
+          [
+            100.9555,
+            13.2329
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Airport Main Access Boulevard (ถนนทางเข้าหลัก)",
+        "road_type": "Arterial Road",
+        "lanes": 2,
+        "speed_limit_kmh": 50,
+        "capacity_vph": 1200,
+        "length_m": 560.3,
+        "surface": "Asphalt Concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "RD-02",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.9548,
+            13.2323
+          ],
+          [
+            100.9552,
+            13.2338
+          ],
+          [
+            100.9558,
+            13.2343
+          ]
+        ]
+      },
+      "properties": {
+        "name": "North Hangar Service Road (ถนนบริการโรงเก็บอากาศยาน)",
+        "road_type": "Service Road",
+        "lanes": 1,
+        "speed_limit_kmh": 30,
+        "capacity_vph": 450,
+        "length_m": 411.9,
+        "surface": "Asphalt Concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "RD-03",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.9545,
+            13.232
+          ],
+          [
+            100.955,
+            13.2322
+          ],
+          [
+            100.9552,
+            13.2319
+          ],
+          [
+            100.9547,
+            13.2317
+          ],
+          [
+            100.9545,
+            13.232
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Terminal Loop & Drop-off Lane (วงเวียนอาคารผู้โดยสาร)",
+        "road_type": "Drop-off / Access",
+        "lanes": 2,
+        "speed_limit_kmh": 20,
+        "capacity_vph": 600,
+        "length_m": 398.4,
+        "surface": "Asphalt Concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "RW-01",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.9535,
+            13.2303
+          ],
+          [
+            100.9568,
+            13.2345
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Runway 03/21 (ทางวิ่งหลัก สนามบินบางพระ)",
+        "road_type": "Aviation Runway",
+        "lanes": 1,
+        "speed_limit_kmh": 120,
+        "capacity_vph": 30,
+        "length_m": 388.9,
+        "surface": "Asphalt Concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TW-01",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.9549,
+            13.2327
+          ],
+          [
+            100.9561,
+            13.2331
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Taxiway Alpha & Apron Connector (ทางขับแอลฟา)",
+        "road_type": "Aviation Taxiway",
+        "lanes": 1,
+        "speed_limit_kmh": 40,
+        "capacity_vph": 50,
+        "length_m": 452.4,
+        "surface": "Asphalt Concrete"
+      }
+    }
+  ]
+}

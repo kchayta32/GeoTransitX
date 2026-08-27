@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoTransitX - Predictive Traffic & Smart Transit Management</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Marked (Markdown Parser) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background-color: #090d16;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .leaflet-container {
+      background: #0b1329 !important;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 3px;
+    }
+    .prose h1, .prose h2, .prose h3 {
+      color: #f1f5f9;
+      font-weight: 700;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .prose p {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+    .prose ul {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .prose li {
+      margin-bottom: 0.25rem;
+    }
+    .prose strong {
+      color: #34d399;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- 1. Header -->
+  <header class="sticky top-0 z-40 bg-[#0c1222]/95 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3 shadow-xl">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-500 text-white shadow-lg">
+          <i data-lucide="globe" class="w-6 h-6 animate-pulse"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-black tracking-wider text-slate-100">
+              GEOTRANSIT<span class="text-emerald-400">X</span>
+            </h1>
+            <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-mono font-bold">
+              v1.0 AI Engine
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400">Predictive Traffic & Transit Management System</p>
+        </div>
+      </div>
+
+      <!-- Agent Status Pills -->
+      <div class="hidden md:flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono">
+        <span class="flex items-center gap-1 text-slate-400">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-1"></span>
+          Agents:
+        </span>
+        <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">DataAgent: OK</span>
+        <span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800">AIAgent: OK</span>
+        <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">Typhoon: 30B</span>
+        <span class="px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-800">VizAgent: OK</span>
+      </div>
+
+      <!-- Header Action -->
+      <button onclick="openGcpModal()" class="flex items-center gap-1.5 px-3 py-2 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+        <span>GCP Accuracy (1.3cm)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 2. Sub-Header Context Bar -->
+  <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-slate-800 px-4 lg:px-8 py-2.5">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between text-xs text-slate-300 gap-3">
+      <div class="flex items-center gap-2">
+        <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400"></i>
+        <span class="font-semibold text-slate-100">
+          สนามบินบางพระ (Bang Phra Airport), จ.ชลบุรี • ระเบียงเศรษฐกิจพิเศษภาคตะวันออก (EEC)
+        </span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-400 font-mono text-[11px]">
+        <span>พื้นที่: <strong class="text-slate-200">60,395 m²</strong></span>
+        <span>•</span>
+        <span>GSD: <strong class="text-emerald-400">2.62 cm/px</strong></span>
+        <span>•</span>
+        <span>พิกัด: <strong class="text-slate-200">UTM Zone 47N</strong></span>
+        <span>•</span>
+        <span>GCP RMS: <strong class="text-emerald-400">0.013 m</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Navigation Tabs -->
+  <div class="bg-[#0c1222]/80 border-b border-slate-800 px-4 lg:px-8">
+    <div class="max-w-7xl mx-auto flex gap-2 overflow-x-auto py-2">
+      <button onclick="switchTab('map')" id="tab-btn-map" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-emerald-600 text-white shadow-lg">
+        <i data-lucide="layers" class="w-4 h-4"></i>
+        <span>🗺️ แผนที่ GIS & Digital Twin</span>
+      </button>
+      <button onclick="switchTab('simulation')" id="tab-btn-simulation" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-slate-900/60 text-slate-400 hover:text-slate-200">
+        <i data-lucide="activity" class="w-4 h-4"></i>
+        <span>🚦 แบบจำลองจราจร 24 ชม.</span>
+      </button>
+      <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-slate-900/60 text-slate-400 hover:text-slate-200">
+        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+        <span>📊 สถิติ & Smart Parking</span>
+      </button>
+      <button onclick="switchTab('report')" id="tab-btn-report" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-slate-900/60 text-slate-400 hover:text-slate-200">
+        <i data-lucide="file-text" class="w-4 h-4"></i>
+        <span>📑 รายงานนโยบาย (Policy Report)</span>
+      </button>
+      <button onclick="switchTab('chat')" id="tab-btn-chat" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition bg-slate-900/60 text-slate-400 hover:text-slate-200">
+        <i data-lucide="bot" class="w-4 h-4"></i>
+        <span>🤖 สนทนา AI (Typhoon Advisor)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 4. Main Views Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8">
+
+    <!-- TAB 1: GIS Map View -->
+    <div id="tab-map" class="tab-content space-y-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="text-base font-bold text-slate-100">แผนที่ภาพถ่ายทางอากาศ Orthophoto และผลการตรวจจับ GeoAI</h2>
+          <p class="text-xs text-slate-400">ความละเอียด 2.62 cm/px ผสานข้อมูลเส้นทาง ลานจอด และจุดควบคุม GCP</p>
+        </div>
+      </div>
+
+      <div class="relative w-full h-[620px] rounded-xl overflow-hidden border border-slate-800 bg-[#0b1329] shadow-2xl">
+        <div id="leaflet-map" class="w-full h-full z-0"></div>
+
+        <!-- Layer Control Box -->
+        <div class="absolute top-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md p-3 rounded-lg border border-slate-700 shadow-lg text-xs space-y-2 max-w-xs">
+          <div class="flex items-center justify-between font-semibold text-slate-200 border-b border-slate-800 pb-1.5">
+            <span class="flex items-center gap-1"><i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i> ชั้นข้อมูล GIS</span>
+            <span class="text-[10px] text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800">Live</span>
+          </div>
+          <div class="space-y-1.5 pt-1">
+            <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
+              <span>📸 Orthophoto (ODX v3.8.2)</span>
+              <input type="checkbox" id="layer-ortho" checked onchange="toggleMapLayer('ortho')" class="accent-emerald-500" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
+              <span>🚗 GeoAI Detections (30 รายการ)</span>
+              <input type="checkbox" id="layer-detections" checked onchange="toggleMapLayer('detections')" class="accent-emerald-500" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
+              <span>🅿️ ลานจอดรถ & Apron</span>
+              <input type="checkbox" id="layer-parking" checked onchange="toggleMapLayer('parking')" class="accent-emerald-500" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
+              <span>🛣️ โครงข่ายเส้นทาง & Runway</span>
+              <input type="checkbox" id="layer-network" checked onchange="toggleMapLayer('network')" class="accent-emerald-500" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
+              <span>🎯 จุดควบคุม GCP (5 จุด)</span>
+              <input type="checkbox" id="layer-gcps" checked onchange="toggleMapLayer('gcps')" class="accent-emerald-500" />
+            </label>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800">
+            <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+              <span>ความโปร่งใสภาพ Ortho:</span>
+              <span id="opacity-label" class="font-mono text-emerald-400">90%</span>
+            </div>
+            <input type="range" min="0" max="1" step="0.05" value="0.9" oninput="changeOrthoOpacity(this.value)" class="w-full h-1.5 bg-slate-700 rounded-lg accent-emerald-500" />
+          </div>
+        </div>
+
+        <!-- Legend Box -->
+        <div class="absolute bottom-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md px-3 py-2 rounded-lg border border-slate-700 text-[11px] flex items-center gap-4 text-slate-300 shadow-md">
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> รถยนต์</div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> เครื่องบิน</div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span> รถบรรทุก</div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500 ring-2 ring-white/50"></span> จุด GCP</div>
+          <div class="flex items-center gap-1.5"><span class="w-3 h-1 bg-pink-500"></span> Runway 03/21</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Simulation View -->
+    <div id="tab-simulation" class="tab-content hidden space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-xl shadow-lg">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-emerald-950 border border-emerald-800 text-emerald-400">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">แบบจำลองการจราจรและการเคลื่อนที่เชิงคาดการณ์ 24 ชั่วโมง</h3>
+            <p class="text-xs text-slate-400">
+              เวลา: <span id="sim-time-display" class="text-emerald-400 font-bold font-mono text-sm">08:15 น.</span> |
+              ระดับการให้บริการ: <span id="sim-los-display" class="font-bold font-mono text-amber-400">LOS D (เริ่มชะลอตัว)</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-400">จุดวิกฤต:</span>
+          <button onclick="jumpSimTime('08:15')" class="px-2.5 py-1 text-xs bg-amber-950/70 hover:bg-amber-900 border border-amber-800 text-amber-300 rounded font-mono">
+            ☀️ เช้า 08:15 (860 vph)
+          </button>
+          <button onclick="jumpSimTime('12:00')" class="px-2.5 py-1 text-xs bg-blue-950/70 hover:bg-blue-900 border border-blue-800 text-blue-300 rounded font-mono">
+            ✈️ ฝึกบิน 12:00
+          </button>
+          <button onclick="jumpSimTime('17:30')" class="px-2.5 py-1 text-xs bg-red-950/80 hover:bg-red-900 border border-red-800 text-red-300 rounded font-mono animate-pulse">
+            🚨 เย็น 17:30 (940 vph Peak)
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Window -->
+      <div class="relative w-full h-[520px] rounded-xl overflow-hidden border border-slate-800 bg-[#0b1329] shadow-2xl">
+        <canvas id="sim-canvas" width="960" height="520" class="w-full h-full object-cover"></canvas>
+
+        <!-- Live Metrics Box -->
+        <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md p-3.5 rounded-lg border border-slate-700 shadow-xl w-64 text-xs space-y-2">
+          <div class="flex justify-between border-b border-slate-800 pb-1">
+            <span class="text-slate-400">ปริมาณจราจร:</span>
+            <span id="sim-volume" class="font-bold font-mono text-blue-400 text-sm">860 vph</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1">
+            <span class="text-slate-400">ความเร็วเฉลี่ย:</span>
+            <span id="sim-speed" class="font-bold font-mono text-emerald-400 text-sm">24.5 กม./ชม.</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-800 pb-1">
+            <span class="text-slate-400">ความล่าช้า (Delay):</span>
+            <span id="sim-delay" class="font-bold font-mono text-amber-400 text-sm">7.2 นาที</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-400">การปล่อย CO2:</span>
+            <span id="sim-co2" class="font-bold font-mono text-rose-400 text-sm">154.8 kg/h</span>
+          </div>
+        </div>
+
+        <div id="sim-bottleneck-alert" class="absolute top-4 right-4 bg-red-950/90 border border-red-700 p-3 rounded-lg text-xs text-red-200 max-w-xs shadow-2xl flex items-start gap-2">
+          <i data-lucide="alert-triangle" class="w-5 h-5 text-red-400 shrink-0"></i>
+          <div>
+            <div class="font-bold text-red-100">แจ้งเตือนจุดคอขวดวิกฤต (Bottleneck)</div>
+            <p class="text-[11px] text-red-300 mt-0.5">ช่วงเวลา 17:30 น. ปริมาณรถเข้าสู่วงเวียนเกิน 85% ของความจุ</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scrubber & Play Controls -->
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl shadow-lg space-y-3">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <div class="flex items-center gap-2">
+            <button id="sim-play-btn" onclick="toggleSimPlay()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition flex items-center gap-1.5">
+              <i data-lucide="play" class="w-4 h-4"></i> <span id="sim-play-text">เริ่มเล่น (Play)</span>
+            </button>
+            <button onclick="resetSim()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+            </button>
+            <div class="flex items-center bg-slate-800 rounded-lg p-0.5 ml-2 border border-slate-700">
+              <button onclick="setSimSpeed(1)" class="sim-spd-btn px-2 py-0.5 rounded text-xs font-mono bg-emerald-600 text-white">1x</button>
+              <button onclick="setSimSpeed(2)" class="sim-spd-btn px-2 py-0.5 rounded text-xs font-mono text-slate-400">2x</button>
+              <button onclick="setSimSpeed(5)" class="sim-spd-btn px-2 py-0.5 rounded text-xs font-mono text-slate-400">5x</button>
+              <button onclick="setSimSpeed(10)" class="sim-spd-btn px-2 py-0.5 rounded text-xs font-mono text-slate-400">10x</button>
+            </div>
+          </div>
+          <div class="font-mono text-sm">
+            เวลา: <span id="sim-scrubber-time" class="text-emerald-400 font-bold">08:15</span> / 22:00 น.
+          </div>
+        </div>
+
+        <input type="range" id="sim-slider" min="0" max="64" value="9" oninput="onSimSliderChange(this.value)" class="w-full h-2 bg-slate-700 rounded-lg accent-emerald-500 cursor-pointer" />
+        <div class="flex justify-between text-[10px] text-slate-400 font-mono">
+          <span>06:00 (เช้าตรู่)</span>
+          <span class="text-amber-400 font-bold">08:15 (Peak เช้า)</span>
+          <span>12:00 (เที่ยง)</span>
+          <span class="text-red-400 font-bold">17:30 (Peak เย็น)</span>
+          <span>22:00 (กลางคืน)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Analytics View -->
+    <div id="tab-analytics" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg">
+          <p class="text-xs text-slate-400">ปริมาณจราจรรวม</p>
+          <h4 class="text-2xl font-black font-mono text-slate-100 mt-1">4,820 <span class="text-xs font-normal text-slate-400">คัน/วัน</span></h4>
+          <p class="text-xs text-emerald-400 mt-2">Peak 17:30 น. (940 vph)</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg">
+          <p class="text-xs text-slate-400">ระดับการให้บริการวิกฤต</p>
+          <h4 class="text-2xl font-black font-mono text-amber-400 mt-1">LOS D/E</h4>
+          <p class="text-xs text-slate-400 mt-2">ความเร็วเฉลี่ย 36.4 กม./ชม.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg">
+          <p class="text-xs text-slate-400">ความละเอียดโดรน (GSD)</p>
+          <h4 class="text-2xl font-black font-mono text-emerald-400 mt-1">2.62 <span class="text-xs font-normal text-slate-400">cm/px</span></h4>
+          <p class="text-xs text-slate-400 mt-2">GCP 3D Error: 1.3 cm</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl shadow-lg">
+          <p class="text-xs text-slate-400">การปล่อยคาร์บอน (CO2)</p>
+          <h4 class="text-2xl font-black font-mono text-rose-400 mt-1">1,420.5 <span class="text-xs font-normal text-slate-400">kg/วัน</span></h4>
+          <p class="text-xs text-emerald-400 mt-2">เป้าหมายลด 22% ด้วย Feeder EV</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl shadow-lg space-y-3">
+          <h4 class="font-bold text-slate-100 text-sm">รูปแบบปริมาณการจราจรและความเร็ว 24 ชม. (Traffic & Speed Profile)</h4>
+          <div class="h-64"><canvas id="traffic-chart"></canvas></div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl shadow-lg space-y-3">
+          <h4 class="font-bold text-slate-100 text-sm">อัตราการใช้งานลานจอดรถ (Parking Occupancy Analysis)</h4>
+          <div class="h-64"><canvas id="parking-chart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Policy Report View -->
+    <div id="tab-report" class="tab-content hidden space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-5 rounded-xl shadow-lg">
+        <div>
+          <h3 class="font-bold text-slate-100 text-base">GeoTransitX: รายงานวิเคราะห์เชิงนโยบายและการบริหารจัดการการจราจรอัจฉริยะ</h3>
+          <p class="text-xs text-slate-400">สนามบินบางพระ (Bang Phra Airport), จ.ชลบุรี (EEC) • สังเคราะห์โดย OpenTyphoon LLM (30B)</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copyReportMarkdown()" class="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 flex items-center gap-1">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>คัดลอก Markdown</span>
+          </button>
+          <button onclick="window.print()" class="px-3 py-1.5 text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg flex items-center gap-1">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i> <span>พิมพ์ / PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-8 rounded-xl shadow-2xl text-slate-200">
+        <div id="policy-report-body" class="prose prose-invert max-w-none text-sm md:text-base">
+          กำลังโหลดเนื้อหารายงาน...
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: Typhoon Chatbot View -->
+    <div id="tab-chat" class="tab-content hidden">
+      <div class="flex flex-col h-[700px] bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-3.5 bg-slate-850 border-b border-slate-800">
+          <div class="flex items-center gap-3">
+            <div class="p-2 bg-gradient-to-br from-emerald-500 to-teal-700 text-white rounded-lg">
+              <i data-lucide="bot" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-slate-100 text-sm">Typhoon AI Policy Advisor</h3>
+                <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-mono">typhoon-v2.5-30b-a3b</span>
+              </div>
+              <p class="text-[11px] text-slate-400">ระบบสนทนาให้คำปรึกษาเชิงนโยบายและวิเคราะห์การจราจรแบบเรียลไทม์</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Prompts -->
+        <div class="px-4 py-2 bg-slate-950/60 border-b border-slate-800 flex gap-2 overflow-x-auto">
+          <button onclick="sendQuickChat('วิเคราะห์สาเหตุของจุดคอขวดช่วง 17:30 น. และแนวทางแก้ไข')" class="shrink-0 text-[11px] bg-slate-800 hover:bg-emerald-900/50 hover:text-emerald-300 text-slate-300 px-3 py-1 rounded-full border border-slate-700">
+            🚦 วิเคราะห์จุดคอขวดช่วง 17:30 น.
+          </button>
+          <button onclick="sendQuickChat('ขอข้อเสนอแนะจัดสรรพื้นที่ลานจอดรถและระบบ Smart Parking')" class="shrink-0 text-[11px] bg-slate-800 hover:bg-emerald-900/50 hover:text-emerald-300 text-slate-300 px-3 py-1 rounded-full border border-slate-700">
+            🅿️ ข้อเสนอแนะ Smart Parking
+          </button>
+          <button onclick="sendQuickChat('แผนพัฒนารถ Feeder Shuttle Bus เชื่อมสนามบินบางพระสู่ถนนสุขุมวิท')" class="shrink-0 text-[11px] bg-slate-800 hover:bg-emerald-900/50 hover:text-emerald-300 text-slate-300 px-3 py-1 rounded-full border border-slate-700">
+            🚌 แผน Feeder Shuttle สุขุมวิท
+          </button>
+          <button onclick="sendQuickChat('ประเมินความถูกต้องแม่นยำของภาพถ่ายโดรน GSD 2.62 ซม. และ GCP 1.3 ซม.')" class="shrink-0 text-[11px] bg-slate-800 hover:bg-emerald-900/50 hover:text-emerald-300 text-slate-300 px-3 py-1 rounded-full border border-slate-700">
+            🛰️ ประเมินความแม่นยำโดรน & GCP
+          </button>
+        </div>
+
+        <!-- Messages Area -->
+        <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="p-2 rounded-lg bg-emerald-700 text-white shrink-0">
+              <i data-lucide="bot" class="w-4 h-4"></i>
+            </div>
+            <div class="max-w-[82%] bg-slate-800/90 border border-slate-700 rounded-2xl rounded-tl-none px-4 py-3 text-xs md:text-sm text-slate-200">
+              สวัสดีครับ! ผมคือ <strong>GeoTransitX AI Policy Advisor</strong> ขับเคลื่อนโดย <strong>Typhoon LLM</strong> (<code>typhoon-v2.5-30b-a3b-instruct</code>)<br/><br/>
+              พร้อมวิเคราะห์ข้อมูลการจราจรและเสนอแนะยุทธศาสตร์ Smart Mobility สำหรับสนามบินบางพระและ EEC ครับ พิมพ์คำถามหรือเลือกหัวข้อแนะนำด้านบนได้เลยครับ
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="p-3 bg-slate-950/80 border-t border-slate-800">
+          <form onsubmit="handleChatSubmit(event)" class="flex items-center gap-2">
+            <input type="text" id="chat-input" placeholder="พิมพ์คำถามเกี่ยวกับระบบจราจร ภาพถ่ายโดรน หรือคำแนะนำนโยบาย..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs md:text-sm text-slate-100 focus:outline-none focus:border-emerald-500" />
+            <button type="submit" class="p-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-medium text-xs flex items-center gap-1">
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- GCP Modal -->
+  <div id="gcp-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden text-xs md:text-sm">
+      <div class="flex items-center justify-between px-6 py-4 bg-slate-850 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+          <h3 class="font-bold text-slate-100 text-base">รายงานความแม่นยำและการสำรวจ GCP (ODX v3.8.2)</h3>
+        </div>
+        <button onclick="closeGcpModal()" class="text-slate-400 hover:text-white font-bold text-base">✕</button>
+      </div>
+      <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
+        <div class="grid grid-cols-3 gap-3">
+          <div class="p-3 bg-emerald-950/50 border border-emerald-800 rounded-xl text-center">
+            <p class="text-slate-400 text-xs">GCP RMS Error</p>
+            <p class="text-xl font-black font-mono text-emerald-400 mt-1">1.3 cm</p>
+          </div>
+          <div class="p-3 bg-blue-950/50 border border-blue-800 rounded-xl text-center">
+            <p class="text-slate-400 text-xs">Ground Sampling (GSD)</p>
+            <p class="text-xl font-black font-mono text-blue-400 mt-1">2.62 cm/px</p>
+          </div>
+          <div class="p-3 bg-purple-950/50 border border-purple-800 rounded-xl text-center">
+            <p class="text-slate-400 text-xs">Point Cloud</p>
+            <p class="text-xl font-black font-mono text-purple-400 mt-1">10.51M</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700 text-xs space-y-1.5">
+          <div class="flex justify-between py-1 border-b border-slate-700/50"><span>ซอฟต์แวร์ประมวลผล:</span><span class="font-mono">ODX version 3.8.2</span></div>
+          <div class="flex justify-between py-1 border-b border-slate-700/50"><span>กล้องโดรน:</span><span class="font-mono">DJI FC9589 (4032x3024)</span></div>
+          <div class="flex justify-between py-1 border-b border-slate-700/50"><span>ภาพถ่ายทั้งหมด:</span><span class="font-mono text-emerald-400 font-bold">76 / 76 ภาพ (100.0%)</span></div>
+          <div class="flex justify-between py-1"><span>ความแม่นยำ CE90:</span><span class="font-mono text-emerald-400 font-bold">0.021 m (2.1 cm)</span></div>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-slate-200 text-xs mb-2">ตารางความคลาดเคลื่อนจุดควบคุมภาคพื้นดิน (GCP Residuals)</h4>
+          <table class="w-full text-left text-xs border border-slate-800 rounded-lg overflow-hidden">
+            <thead class="bg-slate-800 font-mono text-slate-300">
+              <tr><th class="p-2">ID</th><th class="p-2">Error X (m)</th><th class="p-2">Error Y (m)</th><th class="p-2">Error Z (m)</th><th class="p-2">3D Total</th><th class="p-2">สถานะ</th></tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800 font-mono text-slate-200">
+              <tr><td class="p-2 text-red-400 font-bold">gcp01</td><td class="p-2">0.003</td><td class="p-2">0.001</td><td class="p-2">-0.012</td><td class="p-2 text-emerald-400">12.4 mm</td><td class="p-2 text-emerald-400">PASS</td></tr>
+              <tr><td class="p-2 text-red-400 font-bold">gcp02</td><td class="p-2">-0.000</td><td class="p-2">0.007</td><td class="p-2">-0.004</td><td class="p-2 text-emerald-400">8.1 mm</td><td class="p-2 text-emerald-400">PASS</td></tr>
+              <tr><td class="p-2 text-red-400 font-bold">gcp03</td><td class="p-2">-0.001</td><td class="p-2">-0.005</td><td class="p-2">-0.002</td><td class="p-2 text-emerald-400">5.5 mm</td><td class="p-2 text-emerald-400">PASS</td></tr>
+              <tr><td class="p-2 text-red-400 font-bold">gcp04</td><td class="p-2">-0.011</td><td class="p-2">-0.017</td><td class="p-2">-0.002</td><td class="p-2 text-emerald-400">20.3 mm</td><td class="p-2 text-emerald-400">PASS</td></tr>
+              <tr><td class="p-2 text-red-400 font-bold">gcp05</td><td class="p-2">0.007</td><td class="p-2">-0.009</td><td class="p-2">0.012</td><td class="p-2 text-emerald-400">16.6 mm</td><td class="p-2 text-emerald-400">PASS</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    let map, orthoLayer, detectionLayer, parkingLayer, networkLayer, gcpLayer;
+    let simData = null, rawReportMarkdown = '';
+    let simIndex = 9, isSimPlaying = false, simSpeed = 1, simInterval = null;
+
+    async function initApp() {
+      lucide.createIcons();
+      await loadAllData();
+      initLeafletMap();
+      initSimulation();
+      initAnalyticsCharts();
+      renderReportMarkdown();
+    }
+
+    async function loadAllData() {
+      try {
+        const [meta, det, net, pkg, gcp, sim, rep] = await Promise.all([
+          fetch('/data/dataset_metadata.json').then(r => r.json()),
+          fetch('/data/detections.geojson').then(r => r.json()),
+          fetch('/data/network.geojson').then(r => r.json()),
+          fetch('/data/parking.geojson').then(r => r.json()),
+          fetch('/data/gcps.geojson').then(r => r.json()),
+          fetch('/data/traffic_simulation.json').then(r => r.json()),
+          fetch('/data/policy_report.json').then(r => r.json())
+        ]);
+        window.appData = { meta, det, net, pkg, gcp, sim, rep };
+        simData = sim;
+        rawReportMarkdown = rep.markdown_content;
+      } catch (e) {
+        console.error('Data load error:', e);
+      }
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg');
+        btn.classList.add('bg-slate-900/60', 'text-slate-400');
+      });
+      document.getElementById('tab-btn-' + tabId).classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
+      document.getElementById('tab-btn-' + tabId).classList.remove('bg-slate-900/60', 'text-slate-400');
+
+      if (tabId === 'map' && map) {
+        setTimeout(() => map.invalidateSize(), 200);
+      }
+      lucide.createIcons();
+    }
+
+    function initLeafletMap() {
+      if (map) return;
+      const center = window.appData?.meta?.georeferencing?.center_wgs84 || [13.232422, 100.955190];
+      map = L.map('leaflet-map', { center: center, zoom: 17, minZoom: 14, maxZoom: 21, attributionControl: false });
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 20 }).addTo(map);
+
+      // Orthophoto
+      const bounds = window.appData?.meta?.georeferencing?.bounds_wgs84 || [[13.230275, 100.953076], [13.234600, 100.957303]];
+      orthoLayer = L.imageOverlay('/data/orthophoto_web.png', bounds, { opacity: 0.9 }).addTo(map);
+
+      // Parking
+      parkingLayer = L.layerGroup().addTo(map);
+      window.appData?.pkg?.features?.forEach(f => {
+        const occ = f.properties.occupancy_rate_pct;
+        const color = occ > 80 ? '#ef4444' : (occ > 50 ? '#f59e0b' : '#10b981');
+        const poly = L.polygon(f.geometry.coordinates[0].map(c => [c[1], c[0]]), { color: color, weight: 2, fillColor: color, fillOpacity: 0.35 });
+        poly.bindTooltip('<b>' + f.properties.name + '</b><br/>ความจุ: ' + f.properties.occupied_spots + '/' + f.properties.total_capacity + ' คัน (' + occ + '%)');
+        parkingLayer.addLayer(poly);
+      });
+
+      // Network
+      networkLayer = L.layerGroup().addTo(map);
+      window.appData?.net?.features?.forEach(f => {
+        const isRunway = f.properties.road_type.includes('Runway');
+        const color = isRunway ? '#ec4899' : '#3b82f6';
+        const line = L.polyline(f.geometry.coordinates.map(c => [c[1], c[0]]), { color: color, weight: isRunway ? 5 : 3, dashArray: isRunway ? '8, 8' : undefined });
+        line.bindTooltip('<b>' + f.properties.name + '</b><br/>ประเภท: ' + f.properties.road_type);
+        networkLayer.addLayer(line);
+      });
+
+      // GCPs
+      gcpLayer = L.layerGroup().addTo(map);
+      window.appData?.gcp?.features?.forEach(f => {
+        const [lon, lat] = f.geometry.coordinates;
+        const m = L.circleMarker([lat, lon], { radius: 8, fillColor: '#ef4444', color: '#fff', weight: 2, fillOpacity: 0.9 });
+        m.bindTooltip('<b>' + f.properties.id + '</b><br/>3D Error: ' + f.properties.total_3d_error_mm + ' mm');
+        gcpLayer.addLayer(m);
+      });
+
+      // Detections
+      detectionLayer = L.layerGroup().addTo(map);
+      window.appData?.det?.features?.forEach(f => {
+        const [lon, lat] = f.geometry.coordinates;
+        const cls = f.properties.class;
+        const color = cls === 'airplane' ? '#a855f7' : (cls === 'truck' ? '#f97316' : '#3b82f6');
+        const m = L.circleMarker([lat, lon], { radius: cls === 'airplane' ? 8 : 5, fillColor: color, color: '#fff', weight: 1.5, fillOpacity: 0.85 });
+        m.bindTooltip('<b>' + f.properties.object_id + '</b> (' + cls + ')<br/>ความเชื่อมั่น: ' + (f.properties.confidence * 100).toFixed(1) + '%');
+        detectionLayer.addLayer(m);
+      });
+    }
+
+    function toggleMapLayer(layerId) {
+      const isChecked = document.getElementById('layer-' + layerId).checked;
+      if (layerId === 'ortho') isChecked ? map.addLayer(orthoLayer) : map.removeLayer(orthoLayer);
+      if (layerId === 'detections') isChecked ? map.addLayer(detectionLayer) : map.removeLayer(detectionLayer);
+      if (layerId === 'parking') isChecked ? map.addLayer(parkingLayer) : map.removeLayer(parkingLayer);
+      if (layerId === 'network') isChecked ? map.addLayer(networkLayer) : map.removeLayer(networkLayer);
+      if (layerId === 'gcps') isChecked ? map.addLayer(gcpLayer) : map.removeLayer(gcpLayer);
+    }
+
+    function changeOrthoOpacity(val) {
+      if (orthoLayer) orthoLayer.setOpacity(val);
+      document.getElementById('opacity-label').innerText = Math.round(val * 100) + '%';
+    }
+
+    // Simulation Engine
+    function initSimulation() {
+      updateSimFrame();
+    }
+
+    function updateSimFrame() {
+      if (!simData?.timeline) return;
+      const step = simData.timeline[simIndex] || simData.timeline[0];
+
+      document.getElementById('sim-time-display').innerText = step.time + ' น.';
+      document.getElementById('sim-los-display').innerText = 'LOS ' + step.los + ' (' + step.status_th + ')';
+      document.getElementById('sim-los-display').style.color = step.los_color;
+      document.getElementById('sim-volume').innerText = step.volume_vph + ' vph';
+      document.getElementById('sim-speed').innerText = step.speed_kmh + ' กม./ชม.';
+      document.getElementById('sim-delay').innerText = (step.delay_seconds / 60).toFixed(1) + ' นาที';
+      document.getElementById('sim-co2').innerText = step.co2_emissions_kgh + ' kg/h';
+      document.getElementById('sim-slider').value = simIndex;
+      document.getElementById('sim-scrubber-time').innerText = step.time;
+
+      const alertEl = document.getElementById('sim-bottleneck-alert');
+      if (step.los === 'E' || step.los === 'F') {
+        alertEl.classList.remove('hidden');
+      } else {
+        alertEl.classList.add('hidden');
+      }
+
+      // Draw Canvas
+      const canvas = document.getElementById('sim-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+
+      ctx.fillStyle = '#0b1329';
+      ctx.fillRect(0, 0, w, h);
+
+      // Grid
+      ctx.strokeStyle = 'rgba(30, 41, 59, 0.4)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < w; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+      for (let y = 0; y < h; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+
+      const toX = lon => ((lon - 100.9530) / (100.9573 - 100.9530)) * (w - 120) + 60;
+      const toY = lat => h - (((lat - 13.2302) / (13.2346 - 13.2302)) * (h - 120) + 60);
+
+      // Runway
+      ctx.strokeStyle = '#334155'; ctx.lineWidth = 26; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(toX(100.9535), toY(13.2303)); ctx.lineTo(toX(100.9568), toY(13.2345)); ctx.stroke();
+
+      // Road
+      const rColor = step.speed_kmh > 35 ? '#10b981' : (step.speed_kmh > 22 ? '#f59e0b' : '#ef4444');
+      ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 16;
+      ctx.beginPath();
+      ctx.moveTo(toX(100.9532), toY(13.2305));
+      ctx.lineTo(toX(100.9541), toY(13.2316));
+      ctx.lineTo(toX(100.9548), toY(13.2323));
+      ctx.lineTo(toX(100.9555), toY(13.2329));
+      ctx.stroke();
+
+      ctx.strokeStyle = rColor; ctx.lineWidth = 4;
+      ctx.stroke();
+
+      // Parking Box
+      const pkX = toX(100.9543), pkY = toY(13.2320);
+      ctx.fillStyle = 'rgba(30, 58, 138, 0.4)'; ctx.strokeStyle = '#3b82f6'; ctx.lineWidth = 2;
+      ctx.fillRect(pkX - 40, pkY - 25, 80, 50); ctx.strokeRect(pkX - 40, pkY - 25, 80, 50);
+      ctx.fillStyle = '#93c5fd'; ctx.font = '10px sans-serif'; ctx.fillText('Parking Bay', pkX - 35, pkY - 10);
+      ctx.fillStyle = step.parking_occupancy_pct > 80 ? '#f87171' : '#34d399';
+      ctx.font = 'bold 11px sans-serif'; ctx.fillText('Occ: ' + step.parking_occupancy_pct + '%', pkX - 35, pkY + 8);
+
+      // Vehicles
+      step.active_agents?.forEach(agent => {
+        const ax = toX(agent.lon), ay = toY(agent.lat);
+        if (agent.type === 'airplane') {
+          ctx.fillStyle = '#c084fc'; ctx.beginPath(); ctx.arc(ax, ay, 7, 0, Math.PI * 2); ctx.fill();
+        } else {
+          ctx.fillStyle = rColor; ctx.beginPath(); ctx.arc(ax, ay, agent.type === 'bus' ? 6 : 4, 0, Math.PI * 2); ctx.fill();
+        }
+      });
+    }
+
+    function toggleSimPlay() {
+      isSimPlaying = !isSimPlaying;
+      document.getElementById('sim-play-text').innerText = isSimPlaying ? 'พัก (Pause)' : 'เริ่มเล่น (Play)';
+      if (isSimPlaying) {
+        simInterval = setInterval(() => {
+          simIndex = (simIndex + 1) % (simData.timeline.length);
+          updateSimFrame();
+        }, 1000 / simSpeed);
+      } else {
+        clearInterval(simInterval);
+      }
+    }
+
+    function setSimSpeed(s) {
+      simSpeed = s;
+      document.querySelectorAll('.sim-spd-btn').forEach(b => {
+        b.classList.remove('bg-emerald-600', 'text-white');
+        b.classList.add('text-slate-400');
+      });
+      event.target.classList.add('bg-emerald-600', 'text-white');
+      if (isSimPlaying) {
+        clearInterval(simInterval);
+        simInterval = setInterval(() => {
+          simIndex = (simIndex + 1) % (simData.timeline.length);
+          updateSimFrame();
+        }, 1000 / simSpeed);
+      }
+    }
+
+    function onSimSliderChange(v) {
+      simIndex = parseInt(v);
+      if (isSimPlaying) toggleSimPlay();
+      updateSimFrame();
+    }
+
+    function jumpSimTime(t) {
+      const idx = simData.timeline.findIndex(x => x.time === t);
+      if (idx !== -1) {
+        simIndex = idx;
+        updateSimFrame();
+      }
+    }
+
+    function resetSim() {
+      simIndex = 0;
+      updateSimFrame();
+    }
+
+    // Analytics Charts
+    function initAnalyticsCharts() {
+      if (!simData) return;
+      const sampled = simData.timeline.filter((_, i) => i % 2 === 0);
+
+      new Chart(document.getElementById('traffic-chart'), {
+        type: 'line',
+        data: {
+          labels: sampled.map(d => d.time),
+          datasets: [
+            { label: 'ปริมาณรถ (vph)', data: sampled.map(d => d.volume_vph), borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.2)', fill: true, tension: 0.3, yAxisID: 'y' },
+            { label: 'ความเร็วเฉลี่ย (km/h)', data: sampled.map(d => d.speed_kmh), borderColor: '#10b981', tension: 0.3, yAxisID: 'y1' }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: '#1e293b' } },
+            y: { ticks: { color: '#3b82f6' }, grid: { color: '#1e293b' } },
+            y1: { position: 'right', ticks: { color: '#10b981' }, grid: { display: false } }
+          },
+          plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } }
+        }
+      });
+
+      new Chart(document.getElementById('parking-chart'), {
+        type: 'bar',
+        data: {
+          labels: ['Terminal Parking (ลานจอดหลัก)', 'North Hangar (โรงเก็บ)', 'Apron Bay (ลานจอดเครื่องบิน)'],
+          datasets: [
+            { label: 'จอดจริง (คัน/ลำ)', data: [42, 18, 4], backgroundColor: '#f59e0b' },
+            { label: 'ช่องว่าง (Available)', data: [23, 12, 8], backgroundColor: '#10b981' }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: '#1e293b' } },
+            y: { ticks: { color: '#cbd5e1' }, grid: { color: '#1e293b' } }
+          },
+          plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } }
+        }
+      });
+    }
+
+    function renderReportMarkdown() {
+      if (rawReportMarkdown) {
+        document.getElementById('policy-report-body').innerHTML = marked.parse(rawReportMarkdown);
+      }
+    }
+
+    function copyReportMarkdown() {
+      navigator.clipboard.writeText(rawReportMarkdown);
+      alert('คัดลอกเนื้อหา Markdown เรียบร้อยแล้ว!');
+    }
+
+    // Chatbot Engine (Direct Typhoon API)
+    async function handleChatSubmit(e) {
+      e.preventDefault();
+      const inputEl = document.getElementById('chat-input');
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      appendChatMessage('user', text);
+      inputEl.value = '';
+
+      const loadingId = appendLoadingMessage();
+
+      try {
+        const res = await fetch('https://api.opentyphoon.ai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer sk-ZtLbj1CsBusuCbW0LPbNE2UWOJpqTKW9AIteX7bTzV9CaOTE',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: 'typhoon-v2.5-30b-a3b-instruct',
+            messages: [
+              {
+                role: 'system',
+                content: 'คุณคือ GeoTransitX AI Policy Advisor ผู้เชี่ยวชาญการวางแผนระบบจราจร Smart Mobility สนามบินบางพระ จ.ชลบุรี (EEC) สำรวจโดรน 60,395 ตร.ม. GSD 2.62 cm, GCP Accuracy 1.3 cm, ยานพาหนะ 4,820 คัน/วัน, Peak 17:30 น. 940 vph ตอบคำถามเป็นภาษาไทยอย่างกระชับ สุภาพ ชัดเจน และมีข้อมูลสถิติรองรับ'
+              },
+              { role: 'user', content: text }
+            ],
+            max_tokens: 1200
+          })
+        });
+
+        const data = await res.json();
+        removeLoadingMessage(loadingId);
+        appendChatMessage('assistant', data.choices[0].message.content);
+      } catch (err) {
+        removeLoadingMessage(loadingId);
+        appendChatMessage('assistant', 'ขออภัย เกิดข้อผิดพลาดในการเชื่อมต่อ Typhoon LLM: ' + err.message);
+      }
+    }
+
+    function sendQuickChat(prompt) {
+      document.getElementById('chat-input').value = prompt;
+      handleChatSubmit(new Event('submit'));
+    }
+
+    function appendChatMessage(role, text) {
+      const container = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = 'flex items-start gap-3 ' + (role === 'user' ? 'flex-row-reverse' : 'flex-row');
+      div.innerHTML = `
+        <div class="p-2 rounded-lg ${role === 'user' ? 'bg-blue-600' : 'bg-emerald-700'} text-white shrink-0">
+          <i data-lucide="${role === 'user' ? 'user' : 'bot'}" class="w-4 h-4"></i>
+        </div>
+        <div class="max-w-[82%] ${role === 'user' ? 'bg-blue-600/20 border border-blue-500/40 text-blue-50 rounded-tr-none' : 'bg-slate-800/90 border border-slate-700 text-slate-200 rounded-tl-none'} rounded-2xl px-4 py-3 text-xs md:text-sm shadow-md leading-relaxed prose prose-invert prose-sm">
+          ${marked.parse(text)}
+        </div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+      lucide.createIcons();
+    }
+
+    function appendLoadingMessage() {
+      const id = 'loading-' + Date.now();
+      const container = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.id = id;
+      div.className = 'flex items-start gap-3';
+      div.innerHTML = `
+        <div class="p-2 rounded-lg bg-emerald-700 text-white shrink-0"><i data-lucide="bot" class="w-4 h-4"></i></div>
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl rounded-tl-none px-4 py-2.5 text-xs text-slate-300 flex items-center gap-2">
+          <span class="animate-spin text-emerald-400">⏳</span> <span>Typhoon LLM กำลังวิเคราะห์และสังเคราะห์คำตอบ...</span>
+        </div>
+      `;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+      return id;
+    }
+
+    function removeLoadingMessage(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    function openGcpModal() { document.getElementById('gcp-modal').classList.remove('hidden'); document.getElementById('gcp-modal').classList.add('flex'); }
+    function closeGcpModal() { document.getElementById('gcp-modal').classList.add('hidden'); document.getElementById('gcp-modal').classList.remove('flex'); }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>

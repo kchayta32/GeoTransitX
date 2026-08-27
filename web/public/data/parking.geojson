@@ -1,0 +1,125 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "PKG-01",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.9543,
+              13.2316
+            ],
+            [
+              100.9549,
+              13.2318
+            ],
+            [
+              100.9547,
+              13.2322
+            ],
+            [
+              100.9541,
+              13.232
+            ],
+            [
+              100.9543,
+              13.2316
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Main Terminal Parking (ลานจอดรถอาคารผู้โดยสาร)",
+        "total_capacity": 65,
+        "occupied_spots": 42,
+        "available_spots": 23,
+        "occupancy_rate_pct": 64.6,
+        "status": "Moderate",
+        "surface_type": "Paved Asphalt"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PKG-02",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.9552,
+              13.2335
+            ],
+            [
+              100.9557,
+              13.2337
+            ],
+            [
+              100.9555,
+              13.2341
+            ],
+            [
+              100.955,
+              13.2339
+            ],
+            [
+              100.9552,
+              13.2335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "North Hangar Staff & Service Parking (ลานจอดรถเจ้าหน้าที่โรงเก็บ)",
+        "total_capacity": 30,
+        "occupied_spots": 18,
+        "available_spots": 12,
+        "occupancy_rate_pct": 60.0,
+        "status": "Moderate",
+        "surface_type": "Reinforced Concrete"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PKG-03",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.9555,
+              13.2325
+            ],
+            [
+              100.9565,
+              13.2329
+            ],
+            [
+              100.9562,
+              13.2335
+            ],
+            [
+              100.9552,
+              13.2331
+            ],
+            [
+              100.9555,
+              13.2325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Apron Aircraft Staging Bay (พื้นที่จอดอากาศยานลานจอด)",
+        "total_capacity": 12,
+        "occupied_spots": 4,
+        "available_spots": 8,
+        "occupancy_rate_pct": 33.3,
+        "status": "Low",
+        "surface_type": "Heavy Concrete Apron"
+      }
+    }
+  ]
+}

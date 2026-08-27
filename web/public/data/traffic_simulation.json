@@ -1,0 +1,4173 @@
+{
+  "model_metadata": {
+    "name": "GeoTransitX Stochastic Traffic & Transit Flow Model",
+    "time_range": "06:00 - 22:00 (15-min resolution)",
+    "corridor": "Bang Phra Airport & Transit Access Link",
+    "calibration": "Drone Orthophoto GeoAI + Historical Flow Curves"
+  },
+  "kpi_summary": {
+    "daily_total_vehicles": 4820,
+    "peak_morning_hour": "08:15",
+    "peak_morning_volume_vph": 860,
+    "peak_evening_hour": "17:30",
+    "peak_evening_volume_vph": 940,
+    "average_daily_speed_kmh": 36.4,
+    "average_peak_delay_min": 8.5,
+    "peak_los": "LOS D / E (Moderate to Heavy Congestion)",
+    "total_estimated_co2_kg": 1420.5
+  },
+  "timeline": [
+    {
+      "time": "06:00",
+      "decimal_time": 6.0,
+      "volume_vph": 160,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.15,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 10.9,
+      "parking_occupancy_pct": 41.7,
+      "co2_emissions_kgh": 28.8,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 50.25514389126286,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 48.94404454143566,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 47.15183030571346,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 48.34873652772161,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "06:15",
+      "decimal_time": 6.25,
+      "volume_vph": 183,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.17,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 12.5,
+      "parking_occupancy_pct": 40.6,
+      "co2_emissions_kgh": 32.9,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 49.68884391489132,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.60772364011552,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 50.744166035208245,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 47.92625438485728,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "06:30",
+      "decimal_time": 6.5,
+      "volume_vph": 221,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.2,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 15.1,
+      "parking_occupancy_pct": 45.1,
+      "co2_emissions_kgh": 39.8,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 45.17543626718724,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 49.7070236571621,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 47.5832445126655,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 45.87582596259392,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "06:45",
+      "decimal_time": 6.75,
+      "volume_vph": 281,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.26,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 19.2,
+      "parking_occupancy_pct": 49.5,
+      "co2_emissions_kgh": 50.6,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 48.49076861439301,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 46.20706183287336,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 45.7624351605692,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 50.65212400216865,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "07:00",
+      "decimal_time": 7.0,
+      "volume_vph": 364,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.33,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 24.8,
+      "parking_occupancy_pct": 54.4,
+      "co2_emissions_kgh": 65.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 50.37757723979463,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 44.93344147581247,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 47.68399463688514,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 46.95805827306971,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23138,
+          "lon": 100.95392,
+          "speed_kmh": 49.92265243643362,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "07:15",
+      "decimal_time": 7.25,
+      "volume_vph": 467,
+      "speed_kmh": 47.8,
+      "delay_seconds": 1,
+      "vc_ratio": 0.42,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 31.8,
+      "parking_occupancy_pct": 62.9,
+      "co2_emissions_kgh": 84.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 47.56931851853682,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 46.67271611131685,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 48.346845943823226,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.89214235957741,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23174,
+          "lon": 100.95424,
+          "speed_kmh": 48.52152945334442,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 47.42489797727018,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.2318,
+          "lon": 100.95476,
+          "speed_kmh": 46.15326406072835,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "07:30",
+      "decimal_time": 7.5,
+      "volume_vph": 579,
+      "speed_kmh": 47.5,
+      "delay_seconds": 1,
+      "vc_ratio": 0.53,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 39.5,
+      "parking_occupancy_pct": 70.6,
+      "co2_emissions_kgh": 104.2,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.520161631163404,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 48.786813113082,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 48.41582440775723,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 46.798637498137445,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23168,
+          "lon": 100.95458,
+          "speed_kmh": 45.23165542470884,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2326,
+          "lon": 100.9552,
+          "speed_kmh": 46.834507488092726,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.66158595036999,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95417,
+          "speed_kmh": 48.57843642412785,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "07:45",
+      "decimal_time": 7.75,
+      "volume_vph": 681,
+      "speed_kmh": 47.0,
+      "delay_seconds": 3,
+      "vc_ratio": 0.62,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 46.4,
+      "parking_occupancy_pct": 76.0,
+      "co2_emissions_kgh": 122.6,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 49.684231068374004,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 47.360980697610024,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 46.2287318011004,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 46.87177105704393,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 46.385876216456616,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2335,
+          "lon": 100.95615,
+          "speed_kmh": 46.639590039197564,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23222,
+          "lon": 100.95496,
+          "speed_kmh": 44.62531469493232,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23169,
+          "lon": 100.95464,
+          "speed_kmh": 44.05475239077755,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.234,
+          "lon": 100.95544,
+          "speed_kmh": 44.25407243666975,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.26735019828593,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "08:00",
+      "decimal_time": 8.0,
+      "volume_vph": 753,
+      "speed_kmh": 46.5,
+      "delay_seconds": 4,
+      "vc_ratio": 0.68,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 51.3,
+      "parking_occupancy_pct": 82.7,
+      "co2_emissions_kgh": 135.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 45.3101268800986,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.952185168246345,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 48.72592318103812,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 47.44711376281438,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2321,
+          "lon": 100.95494,
+          "speed_kmh": 44.76813277159742,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2338,
+          "lon": 100.95645,
+          "speed_kmh": 47.253138144682794,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 48.92279718285778,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 45.947560071057005,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23188,
+          "lon": 100.95438,
+          "speed_kmh": 48.593321481139455,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95494,
+          "speed_kmh": 45.35054121901464,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 49.39056282169129,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "08:15",
+      "decimal_time": 8.25,
+      "volume_vph": 779,
+      "speed_kmh": 46.3,
+      "delay_seconds": 5,
+      "vc_ratio": 0.71,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 53.1,
+      "parking_occupancy_pct": 81.9,
+      "co2_emissions_kgh": 140.2,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 43.52426345096021,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 44.9079677907044,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 45.616130938915255,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 47.980754790118695,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.696525789195775,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 48.72492052703698,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23216,
+          "lon": 100.95466,
+          "speed_kmh": 48.83921878370336,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23215,
+          "lon": 100.95497,
+          "speed_kmh": 48.388197771950026,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23278,
+          "lon": 100.95476,
+          "speed_kmh": 44.28272432895594,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 48.571226467777656,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.96214059941144,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "08:30",
+      "decimal_time": 8.5,
+      "volume_vph": 752,
+      "speed_kmh": 46.5,
+      "delay_seconds": 4,
+      "vc_ratio": 0.68,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 51.3,
+      "parking_occupancy_pct": 81.6,
+      "co2_emissions_kgh": 135.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 48.7202479881813,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 47.595113834141074,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 45.29618033666114,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 49.27124258283217,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23228,
+          "lon": 100.95484,
+          "speed_kmh": 46.363780329808286,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2326,
+          "lon": 100.9552,
+          "speed_kmh": 48.675864994706316,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23162,
+          "lon": 100.95422,
+          "speed_kmh": 43.505625322790586,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 43.519328142814935,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.2329,
+          "lon": 100.95496,
+          "speed_kmh": 48.463643165173245,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23209,
+          "lon": 100.95459,
+          "speed_kmh": 46.14268684149266,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 47.21333505212224,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "08:45",
+      "decimal_time": 8.75,
+      "volume_vph": 680,
+      "speed_kmh": 47.0,
+      "delay_seconds": 3,
+      "vc_ratio": 0.62,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 46.4,
+      "parking_occupancy_pct": 76.0,
+      "co2_emissions_kgh": 122.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 47.75825497531471,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 49.141285285964194,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 45.298963791032094,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 46.052310382034605,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23138,
+          "lon": 100.95392,
+          "speed_kmh": 46.66657688201997,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2335,
+          "lon": 100.95615,
+          "speed_kmh": 46.78476699097784,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23138,
+          "lon": 100.95392,
+          "speed_kmh": 47.18430728499734,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23229,
+          "lon": 100.95482,
+          "speed_kmh": 46.666188383166485,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23094,
+          "lon": 100.95356,
+          "speed_kmh": 46.96902096692666,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23163,
+          "lon": 100.95428,
+          "speed_kmh": 49.006264973324875,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "09:00",
+      "decimal_time": 9.0,
+      "volume_vph": 580,
+      "speed_kmh": 47.4,
+      "delay_seconds": 2,
+      "vc_ratio": 0.53,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 39.5,
+      "parking_occupancy_pct": 67.9,
+      "co2_emissions_kgh": 104.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 48.72589690073462,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 49.24966957646648,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 47.764195731788334,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.42890660800331,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23174,
+          "lon": 100.95424,
+          "speed_kmh": 46.792767263639064,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2338,
+          "lon": 100.95645,
+          "speed_kmh": 50.256309105484256,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.2318,
+          "lon": 100.95476,
+          "speed_kmh": 45.97364473471198,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 48.11184167622935,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "09:15",
+      "decimal_time": 9.25,
+      "volume_vph": 473,
+      "speed_kmh": 47.8,
+      "delay_seconds": 1,
+      "vc_ratio": 0.43,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 32.2,
+      "parking_occupancy_pct": 63.6,
+      "co2_emissions_kgh": 85.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.02160364402155,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 49.392247130406815,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 45.765311988539054,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 49.13020392949501,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23168,
+          "lon": 100.95458,
+          "speed_kmh": 46.20228003297248,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 47.612701817530656,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.39285131377109,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "09:30",
+      "decimal_time": 9.5,
+      "volume_vph": 380,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.35,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 25.9,
+      "parking_occupancy_pct": 57.8,
+      "co2_emissions_kgh": 68.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 45.40216473969348,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 45.88170247065244,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 49.733722949401994,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 45.78470018315903,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 45.58458473682526,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "09:45",
+      "decimal_time": 9.75,
+      "volume_vph": 313,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.28,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 21.3,
+      "parking_occupancy_pct": 53.0,
+      "co2_emissions_kgh": 56.3,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 45.264075141105174,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.109998905168055,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 47.713525504001595,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 46.152607559136456,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "10:00",
+      "decimal_time": 10.0,
+      "volume_vph": 277,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.25,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 18.9,
+      "parking_occupancy_pct": 47.4,
+      "co2_emissions_kgh": 49.9,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 45.30495232364228,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 47.128141636316215,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 49.7605910800862,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 50.58812803992398,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "10:15",
+      "decimal_time": 10.25,
+      "volume_vph": 271,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.25,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 18.5,
+      "parking_occupancy_pct": 49.2,
+      "co2_emissions_kgh": 48.8,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 50.102776306277775,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 50.58787389093858,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 45.044687153295676,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 45.2871519735649,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "10:30",
+      "decimal_time": 10.5,
+      "volume_vph": 290,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.26,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 19.8,
+      "parking_occupancy_pct": 49.2,
+      "co2_emissions_kgh": 52.2,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.85326112802591,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 46.38074367843967,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 50.020423211611934,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 45.88088313115382,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "10:45",
+      "decimal_time": 10.75,
+      "volume_vph": 325,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.3,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 22.2,
+      "parking_occupancy_pct": 51.6,
+      "co2_emissions_kgh": 58.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 48.09279865419562,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 46.52361219719559,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 49.88731265442856,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 47.72709490369866,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23174,
+          "lon": 100.95424,
+          "speed_kmh": 48.67978864898453,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "11:00",
+      "decimal_time": 11.0,
+      "volume_vph": 369,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.34,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 25.2,
+      "parking_occupancy_pct": 56.4,
+      "co2_emissions_kgh": 66.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 47.30544946713308,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 47.495077070573885,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 49.004341086043155,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 45.23730826447856,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23168,
+          "lon": 100.95458,
+          "speed_kmh": 48.720477586506895,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "11:15",
+      "decimal_time": 11.25,
+      "volume_vph": 414,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.38,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 28.2,
+      "parking_occupancy_pct": 58.0,
+      "co2_emissions_kgh": 74.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 48.7423391797088,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 46.48307365213834,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 45.20268409557835,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 48.23751038238106,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 50.3095167606082,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 46.973055087413826,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "11:30",
+      "decimal_time": 11.5,
+      "volume_vph": 452,
+      "speed_kmh": 47.8,
+      "delay_seconds": 1,
+      "vc_ratio": 0.41,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 30.8,
+      "parking_occupancy_pct": 60.4,
+      "co2_emissions_kgh": 81.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 50.39796848637348,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.28098337548669,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 47.86055098565439,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 48.97235431863777,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2321,
+          "lon": 100.95494,
+          "speed_kmh": 49.21363178010612,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2326,
+          "lon": 100.9552,
+          "speed_kmh": 47.304245515482044,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "11:45",
+      "decimal_time": 11.75,
+      "volume_vph": 477,
+      "speed_kmh": 47.7,
+      "delay_seconds": 1,
+      "vc_ratio": 0.43,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 32.5,
+      "parking_occupancy_pct": 62.9,
+      "co2_emissions_kgh": 85.9,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 49.599044494796914,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 50.61143829819711,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 46.686470165677626,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 50.4465195971633,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.12298864432244,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2335,
+          "lon": 100.95615,
+          "speed_kmh": 46.696976211367456,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23216,
+          "lon": 100.95466,
+          "speed_kmh": 49.42828459047114,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "12:00",
+      "decimal_time": 12.0,
+      "volume_vph": 485,
+      "speed_kmh": 47.7,
+      "delay_seconds": 1,
+      "vc_ratio": 0.44,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 33.1,
+      "parking_occupancy_pct": 62.6,
+      "co2_emissions_kgh": 87.3,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 45.62126005960587,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 50.22073572582623,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 48.63559386430693,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 46.365352487254874,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23228,
+          "lon": 100.95484,
+          "speed_kmh": 46.894102277345254,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2338,
+          "lon": 100.95645,
+          "speed_kmh": 45.37473432971175,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23162,
+          "lon": 100.95422,
+          "speed_kmh": 48.91803720313035,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "12:15",
+      "decimal_time": 12.25,
+      "volume_vph": 474,
+      "speed_kmh": 47.8,
+      "delay_seconds": 1,
+      "vc_ratio": 0.43,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 32.3,
+      "parking_occupancy_pct": 61.9,
+      "co2_emissions_kgh": 85.3,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.61913368165385,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 46.64560960944739,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 45.10095696696677,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 49.492937585405315,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23138,
+          "lon": 100.95392,
+          "speed_kmh": 49.912188990741335,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 47.19438040108541,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23138,
+          "lon": 100.95392,
+          "speed_kmh": 45.28133604374517,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "12:30",
+      "decimal_time": 12.5,
+      "volume_vph": 447,
+      "speed_kmh": 47.8,
+      "delay_seconds": 1,
+      "vc_ratio": 0.41,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 30.5,
+      "parking_occupancy_pct": 58.6,
+      "co2_emissions_kgh": 80.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 49.13747385315531,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 46.13592247249268,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 45.59781793498288,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.610337670162714,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23174,
+          "lon": 100.95424,
+          "speed_kmh": 45.13768933843798,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2326,
+          "lon": 100.9552,
+          "speed_kmh": 46.40323944014114,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "12:45",
+      "decimal_time": 12.75,
+      "volume_vph": 406,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.37,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 27.7,
+      "parking_occupancy_pct": 57.2,
+      "co2_emissions_kgh": 73.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.75248096576685,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 46.150310390471034,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 48.157376442946045,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 45.39918256104074,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23168,
+          "lon": 100.95458,
+          "speed_kmh": 46.26819225217409,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2335,
+          "lon": 100.95615,
+          "speed_kmh": 47.90899479519274,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "13:00",
+      "decimal_time": 13.0,
+      "volume_vph": 356,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.32,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 24.3,
+      "parking_occupancy_pct": 55.2,
+      "co2_emissions_kgh": 64.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 46.783157149654,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 45.8025389605361,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 49.54163315887088,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 49.139863869065934,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 49.894118291865865,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "13:15",
+      "decimal_time": 13.25,
+      "volume_vph": 304,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.28,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 20.7,
+      "parking_occupancy_pct": 51.2,
+      "co2_emissions_kgh": 54.7,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 49.14156970062884,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 47.307294341250575,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 49.025950258170255,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 47.98563346235093,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "13:30",
+      "decimal_time": 13.5,
+      "volume_vph": 255,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.23,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 17.4,
+      "parking_occupancy_pct": 48.6,
+      "co2_emissions_kgh": 45.9,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 48.173988728539186,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 46.84843661206626,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 45.347179915535634,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 46.374160088034145,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "13:45",
+      "decimal_time": 13.75,
+      "volume_vph": 212,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.19,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 14.5,
+      "parking_occupancy_pct": 44.6,
+      "co2_emissions_kgh": 38.2,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 48.37464126799232,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 47.99244170439763,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 48.58298444443057,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 45.448363556023025,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "14:00",
+      "decimal_time": 14.0,
+      "volume_vph": 178,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.16,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 12.1,
+      "parking_occupancy_pct": 40.5,
+      "co2_emissions_kgh": 32.0,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.241948306373274,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 45.846549353539785,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 49.36064615833469,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 46.411482762954876,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "14:15",
+      "decimal_time": 14.25,
+      "volume_vph": 152,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.14,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 10.4,
+      "parking_occupancy_pct": 39.7,
+      "co2_emissions_kgh": 27.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 45.56293258472212,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 47.803744040727906,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 48.35183877434659,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 48.56204995514736,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "14:30",
+      "decimal_time": 14.5,
+      "volume_vph": 136,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.3,
+      "parking_occupancy_pct": 37.9,
+      "co2_emissions_kgh": 24.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.37272143353032,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 45.77895653227507,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 50.145516093440186,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 45.85880032563655,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "14:45",
+      "decimal_time": 14.75,
+      "volume_vph": 130,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 8.9,
+      "parking_occupancy_pct": 38.8,
+      "co2_emissions_kgh": 23.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 46.78325811467937,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 49.3660934885491,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 46.01686917122437,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 46.341092647063995,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "15:00",
+      "decimal_time": 15.0,
+      "volume_vph": 134,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.1,
+      "parking_occupancy_pct": 40.2,
+      "co2_emissions_kgh": 24.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 45.978837605176864,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.062704017394445,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 50.92152707355328,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 47.19972203689868,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "15:15",
+      "decimal_time": 15.25,
+      "volume_vph": 150,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.14,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 10.2,
+      "parking_occupancy_pct": 40.2,
+      "co2_emissions_kgh": 27.0,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 47.92914848549585,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 49.79015541462528,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 48.06427101474907,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 46.363475984336645,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "15:30",
+      "decimal_time": 15.5,
+      "volume_vph": 183,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.17,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 12.5,
+      "parking_occupancy_pct": 43.4,
+      "co2_emissions_kgh": 32.9,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 47.61621961318426,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 49.48086873570738,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 49.18164741325536,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 45.785678322876066,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "15:45",
+      "decimal_time": 15.75,
+      "volume_vph": 236,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.21,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 16.1,
+      "parking_occupancy_pct": 46.2,
+      "co2_emissions_kgh": 42.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.4642155871729,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 46.70941685876893,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 46.83540670303592,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 48.98135387196366,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "16:00",
+      "decimal_time": 16.0,
+      "volume_vph": 311,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.28,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 21.2,
+      "parking_occupancy_pct": 50.8,
+      "co2_emissions_kgh": 56.0,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 49.152743110923495,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 45.32616633559622,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 45.74795768480225,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.69179539406701,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "16:15",
+      "decimal_time": 16.25,
+      "volume_vph": 407,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.37,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 27.8,
+      "parking_occupancy_pct": 58.3,
+      "co2_emissions_kgh": 73.3,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.78547602810797,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 50.340695652638715,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 48.35060793097009,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 49.60181381270499,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23168,
+          "lon": 100.95458,
+          "speed_kmh": 48.57790579735665,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 49.3581602259367,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "16:30",
+      "decimal_time": 16.5,
+      "volume_vph": 519,
+      "speed_kmh": 47.6,
+      "delay_seconds": 1,
+      "vc_ratio": 0.47,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 35.4,
+      "parking_occupancy_pct": 65.6,
+      "co2_emissions_kgh": 93.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 48.1028997933525,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 48.03547261690222,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 45.684683976440596,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 45.0384173327624,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 50.364903729984555,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2326,
+          "lon": 100.9552,
+          "speed_kmh": 49.478490466183445,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23222,
+          "lon": 100.95496,
+          "speed_kmh": 46.22234625911498,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "16:45",
+      "decimal_time": 16.75,
+      "volume_vph": 634,
+      "speed_kmh": 47.2,
+      "delay_seconds": 2,
+      "vc_ratio": 0.58,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 43.2,
+      "parking_occupancy_pct": 74.0,
+      "co2_emissions_kgh": 114.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 44.87163852028246,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.906408693664595,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 48.72241749568848,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 48.92041009453226,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2321,
+          "lon": 100.95494,
+          "speed_kmh": 48.88507910802007,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2335,
+          "lon": 100.95615,
+          "speed_kmh": 49.091028683456486,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 49.556505384955486,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 46.633587415977864,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23188,
+          "lon": 100.95438,
+          "speed_kmh": 47.02620132077537,
+          "route_id": "R-2"
+        }
+      ]
+    },
+    {
+      "time": "17:00",
+      "decimal_time": 17.0,
+      "volume_vph": 735,
+      "speed_kmh": 46.6,
+      "delay_seconds": 4,
+      "vc_ratio": 0.67,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 50.1,
+      "parking_occupancy_pct": 78.9,
+      "co2_emissions_kgh": 132.3,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 48.44035252491572,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 46.05960289949819,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 46.914251191555884,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 46.95250015915579,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.44966345451655,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2338,
+          "lon": 100.95645,
+          "speed_kmh": 43.83126867404792,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23216,
+          "lon": 100.95466,
+          "speed_kmh": 49.56646483526796,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23215,
+          "lon": 100.95497,
+          "speed_kmh": 46.73194180844636,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23278,
+          "lon": 100.95476,
+          "speed_kmh": 45.70521056167341,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 47.749126390128815,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.436095491622766,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "17:15",
+      "decimal_time": 17.25,
+      "volume_vph": 805,
+      "speed_kmh": 46.0,
+      "delay_seconds": 6,
+      "vc_ratio": 0.73,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 54.9,
+      "parking_occupancy_pct": 84.2,
+      "co2_emissions_kgh": 144.9,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 45.0614806416924,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 48.25152417236771,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 46.62359707818702,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 45.293302005729934,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23228,
+          "lon": 100.95484,
+          "speed_kmh": 47.02924990780265,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 46.29372576593542,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23162,
+          "lon": 100.95422,
+          "speed_kmh": 46.48136037771569,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.55316840816598,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.2329,
+          "lon": 100.95496,
+          "speed_kmh": 47.80414533735169,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23209,
+          "lon": 100.95459,
+          "speed_kmh": 46.49948566152132,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 44.15602148384537,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_12",
+          "type": "airplane",
+          "lat": 13.23282,
+          "lon": 100.95526,
+          "speed_kmh": 43.47163043284372,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "17:30",
+      "decimal_time": 17.5,
+      "volume_vph": 831,
+      "speed_kmh": 45.8,
+      "delay_seconds": 6,
+      "vc_ratio": 0.76,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 56.7,
+      "parking_occupancy_pct": 86.4,
+      "co2_emissions_kgh": 149.6,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.54020219902616,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 45.393125901086954,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 45.02012700835338,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 46.904649111651196,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23138,
+          "lon": 100.95392,
+          "speed_kmh": 44.04324984442657,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2326,
+          "lon": 100.9552,
+          "speed_kmh": 43.931800359861604,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23138,
+          "lon": 100.95392,
+          "speed_kmh": 46.3691839124205,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23229,
+          "lon": 100.95482,
+          "speed_kmh": 43.2560277986667,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23094,
+          "lon": 100.95356,
+          "speed_kmh": 45.82443260287354,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23163,
+          "lon": 100.95428,
+          "speed_kmh": 46.814020662221765,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 44.59684483674709,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_12",
+          "type": "airplane",
+          "lat": 13.23256,
+          "lon": 100.95532,
+          "speed_kmh": 44.90983686854295,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "17:45",
+      "decimal_time": 17.75,
+      "volume_vph": 808,
+      "speed_kmh": 46.0,
+      "delay_seconds": 6,
+      "vc_ratio": 0.73,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 55.1,
+      "parking_occupancy_pct": 84.8,
+      "co2_emissions_kgh": 145.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 43.39374403269661,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 47.367510707659356,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 48.56124346908928,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 45.83264476093906,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23174,
+          "lon": 100.95424,
+          "speed_kmh": 48.26975465289898,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2335,
+          "lon": 100.95615,
+          "speed_kmh": 46.62377802080181,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.2318,
+          "lon": 100.95476,
+          "speed_kmh": 44.323164281726044,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 47.012381712845894,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.234,
+          "lon": 100.95544,
+          "speed_kmh": 43.81445357277342,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 45.38491978708158,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 46.94943313184825,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_12",
+          "type": "airplane",
+          "lat": 13.2339,
+          "lon": 100.95641,
+          "speed_kmh": 45.57754361028696,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "18:00",
+      "decimal_time": 18.0,
+      "volume_vph": 741,
+      "speed_kmh": 46.6,
+      "delay_seconds": 4,
+      "vc_ratio": 0.67,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 50.5,
+      "parking_occupancy_pct": 78.8,
+      "co2_emissions_kgh": 133.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 44.446188631146285,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 49.05959827391271,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 43.81641574128299,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 43.917543701741224,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23168,
+          "lon": 100.95458,
+          "speed_kmh": 46.35881144713911,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2338,
+          "lon": 100.95645,
+          "speed_kmh": 45.28829640225977,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.065161662066004,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95417,
+          "speed_kmh": 47.302642348294015,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23188,
+          "lon": 100.95438,
+          "speed_kmh": 44.926447345019035,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_10",
+          "type": "car",
+          "lat": 13.23185,
+          "lon": 100.95479,
+          "speed_kmh": 48.30444630112275,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_11",
+          "type": "car",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 44.31326935856302,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "18:15",
+      "decimal_time": 18.25,
+      "volume_vph": 643,
+      "speed_kmh": 47.2,
+      "delay_seconds": 2,
+      "vc_ratio": 0.58,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 43.8,
+      "parking_occupancy_pct": 73.4,
+      "co2_emissions_kgh": 115.7,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 47.745956219193644,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 47.20991042648383,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 48.40237271633007,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 47.559774819794654,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 47.67818533657087,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2329,
+          "lon": 100.9555,
+          "speed_kmh": 48.52392680524642,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23222,
+          "lon": 100.95496,
+          "speed_kmh": 49.06894790698431,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23169,
+          "lon": 100.95464,
+          "speed_kmh": 47.8219934658562,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_9",
+          "type": "car",
+          "lat": 13.23278,
+          "lon": 100.95476,
+          "speed_kmh": 50.00633360503083,
+          "route_id": "R-2"
+        }
+      ]
+    },
+    {
+      "time": "18:30",
+      "decimal_time": 18.5,
+      "volume_vph": 531,
+      "speed_kmh": 47.6,
+      "delay_seconds": 1,
+      "vc_ratio": 0.48,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 36.2,
+      "parking_occupancy_pct": 65.7,
+      "co2_emissions_kgh": 95.6,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 50.13458126221791,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 47.1538598450279,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 47.20848022649196,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 44.834336388573654,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2321,
+          "lon": 100.95494,
+          "speed_kmh": 47.05552074890301,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2326,
+          "lon": 100.9552,
+          "speed_kmh": 45.86300723729562,
+          "route_id": "R-3"
+        },
+        {
+          "id": "veh_7",
+          "type": "car",
+          "lat": 13.23072,
+          "lon": 100.95338,
+          "speed_kmh": 44.83834495455184,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_8",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 48.79013874834812,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "18:45",
+      "decimal_time": 18.75,
+      "volume_vph": 422,
+      "speed_kmh": 47.8,
+      "delay_seconds": 1,
+      "vc_ratio": 0.38,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 28.8,
+      "parking_occupancy_pct": 60.7,
+      "co2_emissions_kgh": 76.0,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 50.31915045928586,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 45.2113674791051,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 47.32582108747655,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 45.231961681347876,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 50.24257727261901,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_6",
+          "type": "airplane",
+          "lat": 13.2335,
+          "lon": 100.95615,
+          "speed_kmh": 47.90958364578838,
+          "route_id": "R-3"
+        }
+      ]
+    },
+    {
+      "time": "19:00",
+      "decimal_time": 19.0,
+      "volume_vph": 327,
+      "speed_kmh": 47.9,
+      "delay_seconds": 0,
+      "vc_ratio": 0.3,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 22.3,
+      "parking_occupancy_pct": 52.6,
+      "co2_emissions_kgh": 58.9,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 45.85382412620832,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 49.91449227367602,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 50.360327192085954,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 45.23247710143498,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_5",
+          "type": "bus",
+          "lat": 13.23228,
+          "lon": 100.95484,
+          "speed_kmh": 46.230977410607345,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "19:15",
+      "decimal_time": 19.25,
+      "volume_vph": 254,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.23,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 17.3,
+      "parking_occupancy_pct": 47.0,
+      "co2_emissions_kgh": 45.7,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.29852883253452,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 47.75239512700997,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 48.36039342013672,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 50.219373586165304,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "19:30",
+      "decimal_time": 19.5,
+      "volume_vph": 202,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.18,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 13.8,
+      "parking_occupancy_pct": 44.1,
+      "co2_emissions_kgh": 36.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 46.78759187625263,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 45.444695751430224,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 49.1896275021234,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.74952780431816,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "19:45",
+      "decimal_time": 19.75,
+      "volume_vph": 169,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.15,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 11.5,
+      "parking_occupancy_pct": 41.7,
+      "co2_emissions_kgh": 30.4,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.879375113540355,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 49.62096829905506,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 47.747428725884845,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 48.95368418514079,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "20:00",
+      "decimal_time": 20.0,
+      "volume_vph": 150,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.14,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 10.2,
+      "parking_occupancy_pct": 40.1,
+      "co2_emissions_kgh": 27.0,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 50.841271355877616,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 50.45622691266513,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 48.47698772882891,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 49.82783113122693,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "20:15",
+      "decimal_time": 20.25,
+      "volume_vph": 140,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.13,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.5,
+      "parking_occupancy_pct": 38.0,
+      "co2_emissions_kgh": 25.2,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 47.60870132177231,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.86424760830791,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 49.0914670293904,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 46.153901147381994,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "20:30",
+      "decimal_time": 20.5,
+      "volume_vph": 135,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.2,
+      "parking_occupancy_pct": 38.4,
+      "co2_emissions_kgh": 24.3,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 48.52571416729819,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23227,
+          "lon": 100.95486,
+          "speed_kmh": 46.1828902513268,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 47.32609493797327,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23161,
+          "lon": 100.95416,
+          "speed_kmh": 50.32306905453754,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "20:45",
+      "decimal_time": 20.75,
+      "volume_vph": 134,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.1,
+      "parking_occupancy_pct": 39.6,
+      "co2_emissions_kgh": 24.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2317,
+          "lon": 100.9547,
+          "speed_kmh": 45.29663297161189,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23127,
+          "lon": 100.95383,
+          "speed_kmh": 50.607370706353855,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 49.927045132194564,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23149,
+          "lon": 100.95401,
+          "speed_kmh": 48.6833305865639,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "21:00",
+      "decimal_time": 21.0,
+      "volume_vph": 134,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.1,
+      "parking_occupancy_pct": 38.6,
+      "co2_emissions_kgh": 24.1,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 50.792094204954964,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23181,
+          "lon": 100.95431,
+          "speed_kmh": 50.32347362504257,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95424,
+          "speed_kmh": 45.468176012058834,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23175,
+          "lon": 100.95473,
+          "speed_kmh": 45.77996209587373,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "21:15",
+      "decimal_time": 21.25,
+      "volume_vph": 135,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.2,
+      "parking_occupancy_pct": 37.4,
+      "co2_emissions_kgh": 24.3,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2322,
+          "lon": 100.955,
+          "speed_kmh": 45.2288459741642,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23167,
+          "lon": 100.95452,
+          "speed_kmh": 45.98448977391388,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2332,
+          "lon": 100.95504,
+          "speed_kmh": 46.321079050764475,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 50.461579354715255,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "21:30",
+      "decimal_time": 21.5,
+      "volume_vph": 136,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.3,
+      "parking_occupancy_pct": 40.0,
+      "co2_emissions_kgh": 24.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 46.855690886021485,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23083,
+          "lon": 100.95347,
+          "speed_kmh": 49.38504163741512,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23116,
+          "lon": 100.95374,
+          "speed_kmh": 47.67698758798263,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23221,
+          "lon": 100.95498,
+          "speed_kmh": 50.53344232652359,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "21:45",
+      "decimal_time": 21.75,
+      "volume_vph": 136,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.3,
+      "parking_occupancy_pct": 40.9,
+      "co2_emissions_kgh": 24.5,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2323,
+          "lon": 100.9548,
+          "speed_kmh": 46.65789253672101,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.23205,
+          "lon": 100.95491,
+          "speed_kmh": 47.1672390617299,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.2341,
+          "lon": 100.95556,
+          "speed_kmh": 47.371505919630025,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23061,
+          "lon": 100.95329,
+          "speed_kmh": 48.92227760824343,
+          "route_id": "R-1"
+        }
+      ]
+    },
+    {
+      "time": "22:00",
+      "decimal_time": 22.0,
+      "volume_vph": 137,
+      "speed_kmh": 48.0,
+      "delay_seconds": 0,
+      "vc_ratio": 0.12,
+      "los": "A",
+      "los_color": "#10B981",
+      "status_th": "คล่องตัวสูง (Free Flow)",
+      "congestion_pct": 9.3,
+      "parking_occupancy_pct": 40.1,
+      "co2_emissions_kgh": 24.7,
+      "active_agents": [
+        {
+          "id": "veh_1",
+          "type": "bus",
+          "lat": 13.2316,
+          "lon": 100.9541,
+          "speed_kmh": 45.38860612161741,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_2",
+          "type": "car",
+          "lat": 13.2305,
+          "lon": 100.9532,
+          "speed_kmh": 49.45840540757278,
+          "route_id": "R-1"
+        },
+        {
+          "id": "veh_3",
+          "type": "car",
+          "lat": 13.23202,
+          "lon": 100.95452,
+          "speed_kmh": 45.78721707436616,
+          "route_id": "R-2"
+        },
+        {
+          "id": "veh_4",
+          "type": "car",
+          "lat": 13.23223,
+          "lon": 100.95473,
+          "speed_kmh": 47.605559639476425,
+          "route_id": "R-1"
+        }
+      ]
+    }
+  ]
+}

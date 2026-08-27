@@ -1,0 +1,151 @@
+{
+  "dataset_name": "Bang Phra Airport Smart Transit & Aviation GeoAI Survey",
+  "location": "Bang Phra Airport (สนามบินบางพระ), Chon Buri, Thailand",
+  "report_summary": {
+    "title": "Bang Phra Airport Drone Survey Quality Report",
+    "software": "ODX version 3.8.2",
+    "survey_date": "2026-08-27 10:53:42",
+    "capture_window": {
+      "start": "2026-08-26 09:56:39",
+      "end": "2026-08-26 10:04:10",
+      "duration": "7m 31s"
+    },
+    "area_covered_sq_km": 0.060395,
+    "area_covered_sq_m": 60395.0,
+    "processing_time": "45m 58s",
+    "drone_camera": {
+      "model": "DJI FC9589",
+      "resolution": "4032 x 3024 px",
+      "sensor_type": "Brown-Conrady Distortion Model",
+      "focal_length_norm": 0.7173
+    },
+    "reconstruction_stats": {
+      "total_images": 76,
+      "reconstructed_images": 76,
+      "reconstruction_rate_pct": 100.0,
+      "sparse_points": 93449,
+      "dense_points": 10510316,
+      "average_gsd_cm": 2.62,
+      "detected_features_per_image": 10000,
+      "reconstructed_features_avg": 4597,
+      "reprojection_error_pixels": 1.07
+    },
+    "accuracy_metrics": {
+      "horizontal_ce90_m": 0.021,
+      "vertical_le90_m": 0.012,
+      "relative_horizontal_ce90_m": 0.735,
+      "relative_vertical_le90_m": 0.425,
+      "gps_rms_error_total_m": 65.725,
+      "gcp_rms_error_total_m": 0.013,
+      "gcp_rms_x_m": 0.006,
+      "gcp_rms_y_m": 0.009,
+      "gcp_rms_z_m": 0.008
+    },
+    "ground_control_points": [
+      {
+        "id": "gcp01",
+        "error_x_m": 0.003,
+        "error_y_m": 0.001,
+        "error_z_m": -0.012,
+        "relative_pos": [
+          0.25,
+          0.35
+        ]
+      },
+      {
+        "id": "gcp02",
+        "error_x_m": -0.0,
+        "error_y_m": 0.007,
+        "error_z_m": -0.004,
+        "relative_pos": [
+          0.75,
+          0.25
+        ]
+      },
+      {
+        "id": "gcp03",
+        "error_x_m": -0.001,
+        "error_y_m": -0.005,
+        "error_z_m": -0.002,
+        "relative_pos": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "id": "gcp04",
+        "error_x_m": -0.011,
+        "error_y_m": -0.017,
+        "error_z_m": -0.002,
+        "relative_pos": [
+          0.2,
+          0.8
+        ]
+      },
+      {
+        "id": "gcp05",
+        "error_x_m": 0.007,
+        "error_y_m": -0.009,
+        "error_z_m": 0.012,
+        "relative_pos": [
+          0.8,
+          0.75
+        ]
+      }
+    ]
+  },
+  "georeferencing": {
+    "image_width": 9089,
+    "image_height": 9572,
+    "utm_zone": 47,
+    "utm_origin": [
+      711634.257706,
+      1463905.6100645997
+    ],
+    "pixel_scale": [
+      0.05,
+      0.05
+    ],
+    "utm_extents": {
+      "easting_min": 711634.257706,
+      "easting_max": 712088.707706,
+      "northing_min": 1463427.0100645996,
+      "northing_max": 1463905.6100645997,
+      "width_m": 454.44999999995343,
+      "height_m": 478.60000000009313
+    },
+    "bounds_wgs84": [
+      [
+        13.230275469900837,
+        100.95307659075281
+      ],
+      [
+        13.234600706850738,
+        100.95730331571221
+      ]
+    ],
+    "corners_wgs84": {
+      "north_west": [
+        13.234600706850738,
+        100.95311105376133
+      ],
+      "north_east": [
+        13.23456860845151,
+        100.95730331571221
+      ],
+      "south_west": [
+        13.230275469900837,
+        100.95307659075281
+      ],
+      "south_east": [
+        13.230243382359767,
+        100.95726877884546
+      ]
+    },
+    "center_wgs84": [
+      13.232422044605253,
+      100.9551899163034
+    ],
+    "web_image_url": "/data/orthophoto_web.png"
+  }
+}

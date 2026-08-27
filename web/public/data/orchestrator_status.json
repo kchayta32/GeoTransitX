@@ -1,0 +1,44 @@
+{
+  "status": "SUCCESS",
+  "start_time": "2026-08-27 14:13:12",
+  "agents": {
+    "DataAgent": {
+      "status": "COMPLETED",
+      "output": {
+        "area_covered_sq_m": 60395.0,
+        "gsd_cm": 2.62,
+        "gcp_rms_error_m": 0.013,
+        "dense_points": 10510316
+      },
+      "error": null
+    },
+    "AIAgent": {
+      "status": "COMPLETED",
+      "output": {
+        "detections_count": 30,
+        "network_segments": 5,
+        "parking_zones": 3,
+        "simulation_steps": 65
+      },
+      "error": null
+    },
+    "LLMAgent": {
+      "status": "COMPLETED",
+      "output": {
+        "title": "GeoTransitX: รายงานวิเคราะห์เชิงนโยบายและการบริหารจัดการการจราจรอัจฉริยะ",
+        "status": "APPROVED",
+        "words_count": 519
+      },
+      "error": null
+    },
+    "VizAgent": {
+      "status": "READY",
+      "output": "Web Dashboard Ready",
+      "error": null
+    }
+  },
+  "metrics": {},
+  "warnings": [],
+  "pipeline_version": "1.0.0-prod",
+  "end_time": "2026-08-27 14:13:46"
+}

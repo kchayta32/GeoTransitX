@@ -1,0 +1,95 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.95414705037481,
+          13.23307885688672
+        ]
+      },
+      "properties": {
+        "id": "gcp01",
+        "error_x_m": 0.003,
+        "error_y_m": 0.001,
+        "error_z_m": -0.012,
+        "total_3d_error_mm": 12.41,
+        "status": "PASS (High Accuracy)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.95624662051016,
+          13.233495332437137
+        ]
+      },
+      "properties": {
+        "id": "gcp02",
+        "error_x_m": -0.0,
+        "error_y_m": 0.007,
+        "error_z_m": -0.004,
+        "total_3d_error_mm": 8.06,
+        "status": "PASS (High Accuracy)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.9551899346168,
+          13.232422050673165
+        ]
+      },
+      "properties": {
+        "id": "gcp03",
+        "error_x_m": -0.001,
+        "error_y_m": -0.005,
+        "error_z_m": -0.002,
+        "total_3d_error_mm": 5.48,
+        "status": "PASS (High Accuracy)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.95392192383106,
+          13.231134104968486
+        ]
+      },
+      "properties": {
+        "id": "gcp04",
+        "error_x_m": -0.011,
+        "error_y_m": -0.017,
+        "error_z_m": -0.002,
+        "total_3d_error_mm": 20.35,
+        "status": "PASS (High Accuracy)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.95643897148437,
+          13.231331112575441
+        ]
+      },
+      "properties": {
+        "id": "gcp05",
+        "error_x_m": 0.007,
+        "error_y_m": -0.009,
+        "error_z_m": 0.012,
+        "total_3d_error_mm": 16.55,
+        "status": "PASS (High Accuracy)"
+      }
+    }
+  ]
+}
