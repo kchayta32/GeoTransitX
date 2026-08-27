@@ -1,4 +1,4 @@
-﻿import sys
+import sys
 import json
 import math
 from pathlib import Path

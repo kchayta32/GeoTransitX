@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const TYPHOON_API_KEY = process.env.TYPHOON_API_KEY || "sk-ZtLbj1CsBusuCbW0LPbNE2UWOJpqTKW9AIteX7bTzV9CaOTE";
 const TYPHOON_BASE_URL = "https://api.opentyphoon.ai/v1";

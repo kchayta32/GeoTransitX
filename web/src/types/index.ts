@@ -1,4 +1,4 @@
-﻿export interface GcpProperty {
+export interface GcpProperty {
   id: string;
   error_x_m: number;
   error_y_m: number;
