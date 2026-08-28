@@ -1,182 +1,154 @@
-# 🛰️ GeoTransitX: Predictive Traffic & Smart Transit Management System
-> **GeoAI + Drone Photogrammetry + OpenTyphoon LLM for Smart City Digital Twin & Predictive Transit Intelligence**
+# 🛰️ GeoTransitX: Predictive Traffic & Smart Transit AI Platform
+### ระบบแบบจำลองการจราจร 24 ชม. บนแผนที่ดาวเทียมจริง Google Satellite HD & สถาปัตยกรรม Asynchronous Multi-Agent
 
-[![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)](https://nextjs.org/)
-[![Typhoon LLM](https://img.shields.io/badge/LLM-OpenTyphoon%2030B-emerald.svg)](https://opentyphoon.ai/)
-[![GeoAI](https://img.shields.io/badge/GeoAI-YOLOv8%20%2B%20GIS-orange.svg)](https://ultralytics.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-![GeoTransitX Presentation Banner](web/public/banners/banner-pitch.jpg)
-
+[![Live Production](https://img.shields.io/badge/Live_Demo-GeoTransitX_Vercel-10b981?style=for-the-badge&logo=vercel)](https://geotransitx.vercel.app/)
+[![Next.js 14](https://img.shields.io/badge/Next.js-14.2.21-000000?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12_AsyncIO-3776AB?style=for-the-badge&logo=python)](https://python.org/)
+[![YOLOv8](https://img.shields.io/badge/AI_Vision-Ultralytics_YOLOv8-FF6F00?style=for-the-badge&logo=yolo)](https://ultralytics.com/)
+[![OpenTyphoon 30B](https://img.shields.io/badge/LLM-OpenTyphoon_30B-7c3aed?style=for-the-badge)](https://opentyphoon.ai/)
 
 ---
 
-## 🌍 บทนำและความสำคัญ (Overview)
-**GeoTransitX** คือแพลตฟอร์มบริหารจัดการและคาดการณ์การจราจรอัจฉริยะ (Predictive Traffic & Transit Management) สำหรับเมืองอัจฉริยะ (Smart City) และพื้นที่ระเบียงเศรษฐกิจพิเศษภาคตะวันออก (EEC) โดยผสานรวม:
-1. **ภาพถ่ายทางอากาศความละเอียดสูงพิเศษ (Drone Orthophoto)**: สำรวจ ณ **สนามบินบางพระ (Bang Phra Airport)** จ.ชลบุรี (ครอบคลุม 60,395 ตร.ม., GSD 2.62 ซม./พิกเซล, Dense Point Cloud 10.51 ล้านจุด, ความแม่นยำ GCP 1.3 ซม.)
-2. **GeoAI Feature Extraction**: ตรวจจับยานพาหนะ อากาศยาน โครงข่ายถนน และวิเคราะห์การครองพื้นที่ลานจอดรถ (YOLOv8 + Spatial Tiling)
-3. **แบบจำลองการจราจรเชิงคาดการณ์ 24 ชั่วโมง (Predictive Traffic Simulation)**: คำนวณปริมาณรถ (vph), ความเร็วเฉลี่ย, จุดคอขวด (Bottlenecks), ระดับการให้บริการ (LOS A-F), ความล่าช้า และดัชนีคาร์บอน (CO2 Footprint)
-4. **OpenTyphoon LLM Intelligence (`typhoon-v2.5-30b-a3b-instruct`)**: สังเคราะห์รายงานเชิงนโยบายระดับผู้บริหาร (Executive Policy Report) และทำหน้าที่เป็น **AI Policy Advisor** ให้คำปรึกษาแบบเรียลไทม์
+## 🌐 เว็บแอปพลิเคชันจริง (Live Production)
+* **URL**: [https://geotransitx.vercel.app/](https://geotransitx.vercel.app/)
+* **พื้นที่สำรวจนำร่อง**: สนามบินบางพระ (Bang Phra Airport), จ.ชลบุรี — เขตพัฒนาพิเศษภาคตะวันออก (EEC)
 
 ---
 
-## 🏗️ โครงสร้างสถาปัตยกรรม Multi-Agent (Architecture)
+## 🌟 ฟีเจอร์เด่นของระบบ (Key Features)
 
-```
-                       ┌──────────────────────────────────────────────┐
-                       │       GeoTransitX AI Orchestrator           │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-        ┌──────────────────┬──────────────────┼──────────────────┬──────────────────┐
-        ▼                  ▼                  ▼                  ▼                  ▼
-┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐
-│  DataAgent   │   │   AIAgent    │   │   LLMAgent   │   │   VizAgent   │   │  API Backend │
-├──────────────┤   ├──────────────┤   ├──────────────┤   ├──────────────┤   ├──────────────┤
-│• Orthophoto  │   │• Tiled YOLO  │   │• OpenTyphoon │   │• Leaflet GIS │   │• FastAPI     │
-│  Ingestion   │   │  Detection   │   │  LLM (30B)   │   │  DigitalTwin │   │• REST Endpt  │
-│• PDF Report  │   │• Road Graph  │   │• Auto Policy │   │• 24h Flow    │   │• Static File │
-│  Parsing     │   │• Smart Park  │   │  Report (TH) │   │  Simulation  │   │  Hosting     │
-│• WGS84 GeoRef│   │• 24h Traffic │   │• AI Advisor  │   │• Analytics   │   │• Vercel Ready│
-│• GCP Errors  │   │  Simulation  │   │  Chatbot     │   │  Dashboard   │   │              │
-└──────────────┘   └──────────────┘   └──────────────┘   └──────────────┘   └──────────────┘
-```
+### 1. 🛰️ แบบจำลองการจราจร 24 ชม. บนแผนที่ Google Satellite HD จริง (สายฟรี 100%)
+* **Interactive Leaflet Sat Engine**: ผสานภาพถ่ายดาวเทียมความละเอียดสูง **Google Satellite HD** (https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}) และ **Google Hybrid** (lyrs=y) แบบฟรีไม่ต้องใช้ API Key
+* **Dynamic Vehicle Movement**: จำลองการเคลื่อนที่ของยานพาหนะตามพิกัดถนนจริง WGS84 อย่างสมจริง (🚗 รถยนต์, 🚌 รถโดยสาร EEC, 🚚 รถบรรทุกโลจิสติกส์, ✈️ อากาศยานฝึกบิน, ⚡ รถบัสไฟฟ้า EV Shuttle)
+* **24-Hour Timeline Scrubber & Speed Controls**: ควบคุมช่วงเวลาได้ 48 ช่วงเวลา (00:00 - 23:30 น.) พร้อมปุ่มเล่น/พัก, ปรับความเร็ว 1x, 2x, 5x, 10x และปุ่มลัดสู่ช่วงเวลาสำคัญ (02:00 กลางคืน, 08:00 Peak เช้า 860 vph, 12:30 ขนส่งการบิน, 17:30 Peak เย็น 940 vph)
+* **Telemetry HUD**: แสดงปริมาณจราจร (vph), ความเร็วเฉลี่ย (กม./ชม.), ดีเลย์สะสม (วินาที), ระดับ LOS (A-F), การปล่อย CO2 (kg/h) และแจ้งเตือนความปลอดภัยเขต Runway Buffer
 
 ---
 
-## 📊 สรุปผลการวิเคราะห์และสถิติสำคัญ (Key Survey & Traffic Insights)
-
-| ตัวชี้วัด (Key Indicator) | ค่าที่ได้จากการวิเคราะห์จริง | หมายเหตุ / มาตรฐาน |
-| :--- | :--- | :--- |
-| **พื้นที่สำรวจโดรน (Survey Area)** | **60,395 ตร.ม. (0.0604 km²)** | สนามบินบางพระ จ.ชลบุรี (EEC Corridor) |
-| **ความละเอียดภาพ (GSD)** | **2.62 ซม./พิกเซล** | ความละเอียดสูงพิเศษ (Ultra-HD Orthophoto) |
-| **ความแม่นยำพิกัด 3D (GCP RMS)** | **0.013 เมตร (1.3 เซนติเมตร)** | CE90 ทางราบ: 2.1 ซม., LE90 แนวดิ่ง: 1.2 ซม. |
-| **วัตถุตรวจจับด้วย GeoAI** | **30 รายการ** | รถยนต์, รถบรรทุกบริการ, เครื่องบินฝึกบิน, บุคลากร |
-| **ปริมาณจราจรรายวัน (Daily Flow)** | **4,820 คัน/วัน** | แบบจำลอง Stochastic Flow Simulation |
-| **จุดคอขวดวิกฤตเช้า (Morning Peak)** | **08:15 น. (860 vph)** | LOS D (ความเร็วเฉลี่ย 24.5 กม./ชม.) |
-| **จุดคอขวดวิกฤตเย็น (Evening Peak)** | **17:30 น. (940 vph)** | LOS D/E (ความเร็วลดลงเหลือ 18.2 กม./ชม.) |
-| **การปล่อยคาร์บอน (Daily CO2)** | **1,420.5 kg-CO2/วัน** | ลดได้ 22% เมื่อใช้ Feeder EV Shuttle |
+### 2. ⚡ ระบบจำลอง 5 สถานการณ์พิเศษ (Scenario Simulation Engine)
+สามารถเลือกเปลี่ยนสถานการณ์จำลองและระบบจะคำนวณผลกระทบต่อเครือข่ายจราจรแบบ Real-Time:
+1. ☀️ **วันทำงานปกติ (Baseline Flow)**: การไหลเวียนปกติในวันทำการ ปริมาณจราจร 5,420 คัน/วัน
+2. 🌧️ **ฝนตกหนักและน้ำท่วมขัง (Monsoon Surge)**: ความเร็วลดลง 42%, ดีเลย์พุ่ง +115%, เกิดวิกฤต LOS E/F
+3. ✈️ **งานนิทรรศการการบิน EEC (Airshow Peak)**: ปริมาณจราจรพุ่งสูง 185%, ลานจอดและ Apron หนาแน่นสูงสุด
+4. 🚧 **ปิดซ่อมบำรุง Runway / ผิวทาง (Maintenance)**: บีบช่องจราจรเหลือ 1 เลน เกิดคอขวดและแจ้งเตือนความปลอดภัย
+5. ⚡ **ระบบขนส่งไฟฟ้า Smart EV Feeder (Green Mobility)**: รถบัสไฟฟ้าเชื่อมต่อ EEC ลดคาร์บอนลง 65% ความเร็วเพิ่มขึ้น 15%
 
 ---
 
-## 🚀 วิธีการติดตั้งและรันระบบ (Quick Start Guide)
+### 3. 🤖 สถาปัตยกรรม Primary Agent & Dynamic Asynchronous Subagents
+ระบบทำงานด้วยสถาปัตยกรรม **Primary Supervisor + Concurrent Subagents** ที่ประมวลผลคู่ขนานแบบ Asynchronous:
+* 👑 **PrimaryOrchestratorAgent**: ผู้ควบคุมหลักและจัดการคิว AsyncIO Coroutines
+* 🛰️ **SatelliteVisionAgent**: ประมวลผลภาพดาวเทียม Google Sat HD + Drone Orthophoto & YOLOv8 Segmentation
+* 🚦 **TrafficSimulation24hAgent**: คำนวณแบบจำลองจราจร 24 ชม. และสมการความล่าช้า BPR (Bureau of Public Roads)
+* 🗺️ **GeoSpatialTwinAgent**: บริหารจัดการ Digital Twin, ผัง Land Use (u, a, f, w, m) และจุดควบคุม GCP (RMS 1.3 ซม.)
+* 🤖 **OpenTyphoonLLMAgent**: สังเคราะห์นโยบาย Smart Transit ภาษาไทยด้วย OpenTyphoon 30B
+* ⚡ **VizTelemetryAgent**: สตรีมข้อมูล Telemetry เชื่อมโยงกับ Scrubber และแผนที่ 60 FPS
+* **Multi-Agent Command Center Hub**: แผงควบคุมสดบนเว็บแสดงสถานะ Latency, Throughput (fps), CPU %, และปุ่มสั่ง Dynamic Re-Simulation พร้อม Live Event Stream
 
-### 1. โคลนและตั้งค่าสภาพแวดล้อม
-```bash
+---
+
+### 4. 📸 ข้อมูลภาพถ่ายโดรนความแม่นยำสูง (WebODM Photogrammetry)
+* **พื้นที่สำรวจ**: 60,395 ตร.ม. (สนามบินบางพระ จ.ชลบุรี)
+* **ความละเอียดภาพ (GSD)**: 2.62 ซม./พิกเซล
+* **ความแม่นยำ 3D GCP RMS Error**: 0.013 ม. (1.3 ซม.)
+* **ความหนาแน่น Point Cloud**: 10.5 ล้านจุด (Dense 3D Mesh)
+* **เขตความปลอดภัยทางวิ่ง (Runway Buffer)**: 145,056 ตร.ม. (ตามมาตรฐาน ICAO Annex 14)
+
+---
+
+## 🏛️ ผังโครงสร้างสถาปัตยกรรมระบบ (System Architecture)
+
+`
++-----------------------------------------------------------------------------------+
+|                        👑 PrimaryOrchestratorAgent                                |
+|          (Supervisor, Async Coroutines Manager, System Consistency Audit)         |
++-----------------------------------------------------------------------------------+
+       |                      |                       |                      |
+       v                      v                       v                      v
++---------------+      +---------------+      +---------------+      +---------------+
+| 🛰️ SatVision  |      | 🚦 TrafficSim |      | 🗺️ GeoTwin    |      | 🤖 TyphoonLLM |
+|   Subagent    |      |   Subagent    |      |   Subagent    |      |   Subagent    |
+| (YOLOv8 Seg + |      | (24h BPR Flow |      | (WebODM Land  |      | (OpenTyphoon  |
+|  Sat HD Tile) |      | + 5 Scenario) |      |  Use + GCP)   |      |  30B Thai AI) |
++---------------+      +---------------+      +---------------+      +---------------+
+       \                      /                       \                      /
+        ---------------------------------------------------------------------
+                                          |
+                                          v
+                       +-------------------------------------+
+                       |        ⚡ VizTelemetryAgent          |
+                       | (Real-time Stream & Map Sync Engine)|
+                       +-------------------------------------+
+                                          |
+                                          v
+                       +-------------------------------------+
+                       |   🌐 GeoTransitX Web Dashboard      |
+                       |  (Next.js 14 + Leaflet Google Sat)  |
+                       +-------------------------------------+
+`
+
+---
+
+## 📊 ตารางเปรียบเทียบผลการจำลอง 5 สถานการณ์ (Scenario Benchmarks)
+
+| สถานการณ์จำลอง (Scenario) | ปริมาณจราจร Peak (vph) | ความเร็วเฉลี่ย (km/h) | ดีเลย์สะสม (วินาที) | ระดับ LOS | การปล่อย CO2 (kg/h) | สถานะความปลอดภัย Runway Buffer |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| ☀️ **วันทำงานปกติ (Normal)** | 940 | 36.4 | 142 | **LOS D** | 169.2 | ปลอดภัย (มีระบบเฝ้าระวัง) |
+| 🌧️ **ฝนตกหนัก (Monsoon)** | 865 | 21.1 | 305 | **LOS E/F** | 228.4 | เฝ้าระวังพิเศษ (ผิวทางลื่น) |
+| ✈️ **งานการบิน (Airshow)** | 1,739 | 23.6 | 340 | **LOS E/F** | 321.5 | มีกิจกรรมภาคพื้นหนาแน่น |
+| 🚧 **ปิดซ่อมทาง (Maintenance)** | 799 | 18.2 | 369 | **LOS F** | 245.3 | ⚠️ มีการรุกล้ำแนวเขตก่อสร้าง |
+| ⚡ **ขนส่งไฟฟ้า (Green EV)** | 733 | 41.8 | 85 | **LOS A/B** | 59.2 | ปลอดภัยสูงสุด (Zero Emission) |
+
+---
+
+## 🚀 การติดตั้งและรันในเครื่อง (Local Setup Guide)
+
+### 1. ความต้องการของระบบ (Prerequisites)
+* Node.js 18+ & npm
+* Python 3.10+ (แนะนำ 3.12)
+* Git
+
+### 2. โคลนคลังโค้ด (Clone Repository)
+`ash
 git clone https://github.com/kchayta32/GeoTransitX.git
 cd GeoTransitX
-```
+`
 
-### 2. รันระบบผ่าน Python Orchestrator (แบบครบวงจร)
-```bash
-# รัน Pipeline ทั้งหมดและเปิด Web Dashboard อัตโนมัติ:
-python run.py
-
-# หรือรันเฉพาะ Pipeline ประมวลผลข้อมูล:
-python run.py --pipeline
-
-# หรือรันเฉพาะ Web Server:
-python run.py --server --port 8000
-```
-เปิดบราวเซอร์ที่: **`http://localhost:8000`**
-
-### 3. รันผ่าน Next.js Web App (สำหรับ Vercel Deployment)
-```bash
+### 3. รันส่วนเว็บ Dashboard (Frontend)
+`ash
 cd web
 npm install
 npm run dev
-```
-เปิดบราวเซอร์ที่: **`http://localhost:3000`**
+`
+เปิดเบราว์เซอร์ที่ http://localhost:3000
+
+### 4. รัน Asynchronous Multi-Agent Pipeline (Backend)
+`ash
+# ติดตั้ง Python dependencies
+pip install -r python_pipeline/requirements.txt # หรือ ultralytics pillow fastapi uvicorn requests
+
+# รัน Multi-Agent Pipeline
+python python_pipeline/orchestrator.py
+
+# รัน API Server
+python python_pipeline/server.py
+`
 
 ---
 
-## 📑 ฟังก์ชันเด่นของระบบ (Key Features)
+## 🛠️ รายละเอียดเทคโนโลยีที่ใช้ (Tech Stack)
 
-### 1. 🗺️ แผนที่ GIS & Digital Twin (Interactive Map)
-- ซ้อนทับภาพถ่ายโดรน **Orthophoto (ODX v3.8.2)** บนแผนที่ดาวเทียมอย่างแม่นยำ
-- ปรับระดับความโปร่งใส (Opacity Slider) ได้แบบเรียลไทม์
-- เลเยอร์ตรวจจับวัตถุ GeoAI พร้อม Bounding Box พิกัด WGS84 และค่าความเชื่อมั่น (Confidence)
-- แสดงจุดควบคุมภาคพื้นดิน **GCP (gcp01 - gcp05)** พร้อมค่าความคลาดเคลื่อน 3 มิติ
-
-### 2. 🚦 แบบจำลองการจราจรเชิงคาดการณ์ 24 ชั่วโมง (Traffic Simulation)
-- แถบเลื่อนเวลา (Scrubber) ตั้งแต่ 06:00 ถึง 22:00 น.
-- ปุ่ม Play/Pause และปรับความเร็วจำลอง (1x, 2x, 5x, 10x)
-- แอนิเมชันอนุภาคยานพาหนะและเครื่องบินเคลื่อนที่จริงตามโครงข่ายเส้นทาง
-- ป้ายเตือนจุดคอขวดอัตโนมัติ (**Bottleneck Chokepoint Alert**) ในช่วงเวลาเร่งด่วน
-
-### 3. 📊 แดชบอร์ดสถิติ & การจัดการลานจอด (Smart Parking Analytics)
-- กราฟเปรียบเทียบปริมาณจราจรกับความเร็วเดินทาง (Traffic Volume vs. Speed Profile)
-- การวิเคราะห์การครองพื้นที่ลานจอดรถ (Terminal Parking, North Hangar, Apron Bay)
-- รายงานสถิติกล้องโดรนและพารามิเตอร์การฟื้นฟูภาพถ่าย 3 มิติ
-
-### 4. 📑 รายงานเชิงนโยบายระดับผู้บริหาร (Typhoon Auto Policy Report)
-- รายงานภาษาไทยฉบับสมบูรณ์ที่สังเคราะห์โดย **OpenTyphoon LLM**
-- ครอบคลุม: บทสรุปผู้บริหาร, การวินิจฉัยจุดคอขวด, ยุทธศาสตร์ Smart Parking, แผนพัฒนาระบบ Feeder Shuttle สุขุมวิท-EEC, และ ESG Green Mobility Roadmap 3 ระยะ
-- รองรับการ Export เป็น PDF และคัดลอก Markdown
-
-### 5. 🤖 Typhoon AI Policy Advisor (Chatbot)
-- สนทนาสดกับโมเดล **`typhoon-v2.5-30b-a3b-instruct`**
-- ถามตอบปัญหาการจราจร ขอคำแนะนำเชิงเทคนิค และแนวทางการแก้ปัญหาพื้นที่เฉพาะ
-
-### 6. 📊 Business Model Canvas (BMC) & Presentation Slides (16:9)
-- โมเดลธุรกิจ 9 ช่อง ครบถ้วนตามมาตรฐาน **BOI-STEAM, สอวช., DDM, BUU (กลุ่ม : ขนส่ง)**
-- สไลด์นำเสนอ 6 สไลด์พร้อมใช้งานแบบ Widescreen 16:9 (รายละเอียดเพิ่มเติมที่ [BMC_AND_PRESENTATION_SLIDES.md](docs/BMC_AND_PRESENTATION_SLIDES.md))
-
-![GeoTransitX BMC Slide](docs/slides/slide-4-bmc.jpg)
+* **Frontend**: Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Leaflet GIS, Recharts, Lucide Icons
+* **Multi-Agent Engine**: Python AsyncIO, Concurrent ThreadPoolExecutor, Dynamic Subagents Manager
+* **Computer Vision & GeoAI**: Ultralytics YOLOv8 (Instance Segmentation & Object Detection), GDAL/Rasterio
+* **Photogrammetry & GIS**: WebODM, QGIS, WGS84/UTM Zone 47N Georeferencing
+* **Large Language Model (LLM)**: OpenTyphoon 	yphoon-v2.5-30b-a3b-instruct
+* **Basemaps**: Google Satellite HD Tile Stream (Free Tier), Google Hybrid, Esri World Imagery, Carto Dark
+* **Deployment & CI/CD**: Vercel Serverless Edge Platform, GitHub Actions
 
 ---
 
-
-## ☁️ การ Deploy สู่ Cloud และ Vercel (Deployment)
-
-### Vercel Deployment (Frontend):
-```bash
-# ติดตั้ง Vercel CLI
-npm install -g vercel
-
-# Deploy ไปยัง Vercel
-cd web
-vercel --prod
-```
-
-### Google Cloud (GCP) Deployment:
-- **Cloud Run / Compute Engine**: รองรับการรัน `python_pipeline/server.py` เป็นคอนเทนเนอร์ FastAPI
-- **Cloud Storage Bucket**: `gs://geoai-traffic-data` สำหรับจัดเก็บไฟล์ภาพถ่าย Orthophoto ขนาดใหญ่
-
----
-
-## 📁 โครงสร้างโปรเจกต์ที่เป็นระเบียบ (Project Hierarchy)
-```
-GeoTransitX/
-├── data/                         # ศูนย์รวมชุดข้อมูลนำเข้าและประมวลผล (Data Assets)
-│   ├── raw/                      # ข้อมูลดิบภาพถ่ายโดรนและรายงานสำรวจ GCP (142MB GeoTIFF + PDF)
-│   └── webodm/                   # ข้อมูลสำรวจจาก WebODM (Land Use, Runway Buffer, Centerlines)
-├── models/                       # ศูนย์รวมโมเดล AI / Deep Learning Weights (YOLOv8 / YOLO26x)
-├── workshops/                    # สื่อการเรียนรู้และ Workshop Jupyter Notebooks
-├── docs/                         # คู่มือและเอกสารสถาปัตยกรรม (ARCHITECTURE.md)
-├── python_pipeline/              # Backend Multi-Agent AI System
-│   ├── config.py                 # System Configuration & Smart Path Resolver
-│   ├── data_agent.py             # DataAgent: Ingestion & WebODM Zoning
-│   ├── ai_agent.py               # AIAgent: YOLO Segmentation & 24h Simulation
-│   ├── llm_agent.py              # LLMAgent: Typhoon LLM Policy Synthesis
-│   ├── orchestrator.py           # Primary Agent Pipeline Coordinator
-│   ├── server.py                 # FastAPI REST Backend Server
-│   └── verify_endpoints.py       # Automated Verification Suite (100% Passed)
-├── web/                          # Frontend Dashboard (Next.js 14 + React + Tailwind)
-│   ├── public/                   # Static assets, Web Dashboard & Public GeoJSON
-│   │   ├── data/                 # Auto-generated pipeline outputs
-│   │   └── index.html            # Standalone Interactive Dashboard SPA
-│   └── src/                      # Next.js Source Code (MapView, Simulation, Firebase)
-├── run.py                        # Unified Launcher & Orchestrator CLI
-└── README.md
-```
-
----
-
-## 👥 Multi-Agent Engineering Team
-- **Primary Agent**: GeoTransitX AI Orchestrator
-- **Sub-Agent 1**: DataAgent (Drone Ingestion, WebODM Land Use & Georeferencing)
-- **Sub-Agent 2**: AIAgent (GeoAI YOLO Segmentation & 24h Predictive Traffic Simulation)
-- **Sub-Agent 3**: LLMAgent (Typhoon LLM Executive Policy Intelligence)
-- **Sub-Agent 4**: VizAgent (Interactive Leaflet GIS & Real-time Live Traffic)
-
+## 👥 ผู้พัฒนาและลิขสิทธิ์ (Team & License)
+* **โครงการ**: GeoTransitX — Predictive Traffic & Smart Transit AI System
+* **GCP Project ID**: geoai-506806 (Project No: 334457340669)
+* **ลิขสิทธิ์**: MIT License — สามารถนำไปพัฒนาต่อยอดเพื่อประโยชน์สาธารณะและเมืองอัจฉริยะ EEC
