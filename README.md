@@ -7,6 +7,9 @@
 [![GeoAI](https://img.shields.io/badge/GeoAI-YOLOv8%20%2B%20GIS-orange.svg)](https://ultralytics.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![GeoTransitX Presentation Banner](web/public/banners/banner-pitch.jpg)
+
+
 ---
 
 ## 🌍 บทนำและความสำคัญ (Overview)
@@ -115,7 +118,14 @@ npm run dev
 - สนทนาสดกับโมเดล **`typhoon-v2.5-30b-a3b-instruct`**
 - ถามตอบปัญหาการจราจร ขอคำแนะนำเชิงเทคนิค และแนวทางการแก้ปัญหาพื้นที่เฉพาะ
 
+### 6. 📊 Business Model Canvas (BMC) & Presentation Slides (16:9)
+- โมเดลธุรกิจ 9 ช่อง ครบถ้วนตามมาตรฐาน **BOI-STEAM, สอวช., DDM, BUU (กลุ่ม : ขนส่ง)**
+- สไลด์นำเสนอ 6 สไลด์พร้อมใช้งานแบบ Widescreen 16:9 (รายละเอียดเพิ่มเติมที่ [BMC_AND_PRESENTATION_SLIDES.md](docs/BMC_AND_PRESENTATION_SLIDES.md))
+
+![GeoTransitX BMC Slide](docs/slides/slide-4-bmc.jpg)
+
 ---
+
 
 ## ☁️ การ Deploy สู่ Cloud และ Vercel (Deployment)
 
@@ -135,34 +145,29 @@ vercel --prod
 
 ---
 
-## 📁 โครงสร้างโปรเจกต์ (Project Structure)
+## 📁 โครงสร้างโปรเจกต์ที่เป็นระเบียบ (Project Hierarchy)
 ```
 GeoTransitX/
-├── Bang-Phra-Airport-8-26-2026-orthophoto.tif   # Raw Drone Orthophoto (GeoTIFF)
-├── Bang-Phra-Airport-8-26-2026-report.pdf       # Photogrammetry GCP Quality Report
-├── run.py                                       # Unified Launcher & Orchestrator CLI
-├── python_pipeline/
-│   ├── config.py                                # System Configuration & API Keys
-│   ├── data_agent.py                            # DataAgent: Ingestion & Georeferencing
-│   ├── ai_agent.py                              # AIAgent: YOLO Detection & Simulation
-│   ├── llm_agent.py                             # LLMAgent: Typhoon LLM Policy Synthesis
-│   ├── orchestrator.py                          # Primary Agent Pipeline Coordinator
-│   └── server.py                                # FastAPI Server & REST Endpoints
-├── web/
-│   ├── package.json                             # Web Dependencies & Scripts
-│   ├── vercel.json                              # Vercel Deployment Configuration
-│   ├── public/
-│   │   ├── index.html                           # Standalone Interactive Dashboard SPA
-│   │   └── data/
-│   │       ├── orthophoto_web.png               # Web-Optimized Orthophoto Overlay
-│   │       ├── dataset_metadata.json            # Survey & Georeferencing Metadata
-│   │       ├── detections.geojson               # GeoAI Object Detections
-│   │       ├── network.geojson                  # Road & Runway Network
-│   │       ├── parking.geojson                  # Parking Zones & Occupancy
-│   │       ├── gcps.geojson                     # Ground Control Points
-│   │       ├── traffic_simulation.json          # 24-Hour Predictive Model Data
-│   │       └── policy_report.json               # Typhoon LLM Executive Report
-│   └── src/                                     # Next.js 14 React Source Code
+├── data/                         # ศูนย์รวมชุดข้อมูลนำเข้าและประมวลผล (Data Assets)
+│   ├── raw/                      # ข้อมูลดิบภาพถ่ายโดรนและรายงานสำรวจ GCP (142MB GeoTIFF + PDF)
+│   └── webodm/                   # ข้อมูลสำรวจจาก WebODM (Land Use, Runway Buffer, Centerlines)
+├── models/                       # ศูนย์รวมโมเดล AI / Deep Learning Weights (YOLOv8 / YOLO26x)
+├── workshops/                    # สื่อการเรียนรู้และ Workshop Jupyter Notebooks
+├── docs/                         # คู่มือและเอกสารสถาปัตยกรรม (ARCHITECTURE.md)
+├── python_pipeline/              # Backend Multi-Agent AI System
+│   ├── config.py                 # System Configuration & Smart Path Resolver
+│   ├── data_agent.py             # DataAgent: Ingestion & WebODM Zoning
+│   ├── ai_agent.py               # AIAgent: YOLO Segmentation & 24h Simulation
+│   ├── llm_agent.py              # LLMAgent: Typhoon LLM Policy Synthesis
+│   ├── orchestrator.py           # Primary Agent Pipeline Coordinator
+│   ├── server.py                 # FastAPI REST Backend Server
+│   └── verify_endpoints.py       # Automated Verification Suite (100% Passed)
+├── web/                          # Frontend Dashboard (Next.js 14 + React + Tailwind)
+│   ├── public/                   # Static assets, Web Dashboard & Public GeoJSON
+│   │   ├── data/                 # Auto-generated pipeline outputs
+│   │   └── index.html            # Standalone Interactive Dashboard SPA
+│   └── src/                      # Next.js Source Code (MapView, Simulation, Firebase)
+├── run.py                        # Unified Launcher & Orchestrator CLI
 └── README.md
 ```
 
@@ -170,7 +175,8 @@ GeoTransitX/
 
 ## 👥 Multi-Agent Engineering Team
 - **Primary Agent**: GeoTransitX AI Orchestrator
-- **Sub-Agent 1**: DataAgent (Drone Ingestion & Georeferencing)
-- **Sub-Agent 2**: AIAgent (GeoAI YOLO & Predictive Traffic Modeling)
-- **Sub-Agent 3**: LLMAgent (Typhoon LLM Policy Intelligence)
-- **Sub-Agent 4**: VizAgent (Interactive Geospatial Visualization)
+- **Sub-Agent 1**: DataAgent (Drone Ingestion, WebODM Land Use & Georeferencing)
+- **Sub-Agent 2**: AIAgent (GeoAI YOLO Segmentation & 24h Predictive Traffic Simulation)
+- **Sub-Agent 3**: LLMAgent (Typhoon LLM Executive Policy Intelligence)
+- **Sub-Agent 4**: VizAgent (Interactive Leaflet GIS & Real-time Live Traffic)
+

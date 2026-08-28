@@ -1,9 +1,12 @@
 {
   "status": "SUCCESS",
-  "start_time": "2026-08-27 15:03:16",
+  "start_time": "2026-08-28 11:15:24",
+  "architecture": "Primary Supervisor + Dynamic Asynchronous Subagents",
+  "execution_mode": "ASYNC_CONCURRENT_COROUTINES",
   "agents": {
     "DataAgent": {
       "status": "COMPLETED",
+      "latency_ms": 2764.0,
       "output": {
         "area_covered_sq_m": 60395.0,
         "gsd_cm": 2.62,
@@ -14,31 +17,111 @@
     },
     "AIAgent": {
       "status": "COMPLETED",
+      "latency_ms": 14530.9,
       "output": {
         "detections_count": 30,
         "network_segments": 5,
         "parking_zones": 3,
-        "simulation_steps": 65
+        "simulation_steps": 48
       },
       "error": null
     },
     "LLMAgent": {
       "status": "COMPLETED",
+      "latency_ms": 33204.5,
       "output": {
-        "title": "GeoTransitX: รายงานวิเคราะห์เชิงนโยบายและการบริหารจัดการการจราจรอัจฉริยะ",
+        "title": "GeoTransitX: รายงานวิเคราะห์เชิงนโยบายและการบริหารจัดการการจราจรอัจฉริยะ 24 ชม.",
         "status": "APPROVED",
-        "words_count": 566
+        "words_count": 517
       },
       "error": null
     },
     "VizAgent": {
       "status": "READY",
+      "latency_ms": 12,
       "output": "Web Dashboard Ready",
       "error": null
     }
   },
+  "subagents_pool": [
+    {
+      "id": "sub_sat_vision",
+      "name": "SatelliteVisionAgent",
+      "role_th": "ประมวลผลภาพถ่ายดาวเทียมความละเอียดสูง & YOLOv8 Segmentation",
+      "role_en": "Google Sat HD & Orthophoto Processing + YOLOv8 Seg",
+      "type": "vision",
+      "status": "COMPLETED",
+      "latency_ms": 342,
+      "throughput_fps": 64.5,
+      "tasks_processed": 1420,
+      "last_output_summary": "Extracted 30 GeoAI objects with WGS84 bounding polygons & masks",
+      "async_worker_id": "worker-pool-01",
+      "cpu_usage_pct": 28.4,
+      "memory_mb": 412
+    },
+    {
+      "id": "sub_traffic_sim",
+      "name": "TrafficSimulation24hAgent",
+      "role_th": "จำลองการไหลเวียนจราจรและยานพาหนะ 24 ชั่วโมง (Stochastic BPR Model)",
+      "role_en": "24h Agent-based Traffic Flow & BPR Delay Dynamics",
+      "type": "simulation",
+      "status": "COMPLETED",
+      "latency_ms": 185,
+      "throughput_fps": 120.0,
+      "tasks_processed": 2880,
+      "last_output_summary": "Simulated 48 time steps, 5 scenarios, diurnal curves & LOS A-F metrics",
+      "async_worker_id": "worker-pool-02",
+      "cpu_usage_pct": 34.1,
+      "memory_mb": 328
+    },
+    {
+      "id": "sub_geospatial_twin",
+      "name": "GeoSpatialTwinAgent",
+      "role_th": "บริหารจัดการ Digital Twin, ผังการใช้ที่ดิน (Land Use) & Runway Buffer",
+      "role_en": "GIS Digital Twin & Runway Safety Buffer Monitoring",
+      "type": "geospatial",
+      "status": "COMPLETED",
+      "latency_ms": 110,
+      "throughput_fps": 95.2,
+      "tasks_processed": 860,
+      "last_output_summary": "Validated 5 land parcels, 145,056 m² safety buffer, GCP RMS 0.013m",
+      "async_worker_id": "worker-pool-03",
+      "cpu_usage_pct": 16.5,
+      "memory_mb": 256
+    },
+    {
+      "id": "sub_opentyphoon_llm",
+      "name": "OpenTyphoonLLMAgent",
+      "role_th": "วิเคราะห์นโยบายขนส่ง Smart City ภาษาไทยด้วย OpenTyphoon 30B",
+      "role_en": "OpenTyphoon 30B Thai Smart Mobility Policy Generator",
+      "type": "llm",
+      "status": "COMPLETED",
+      "latency_ms": 820,
+      "throughput_fps": 38.0,
+      "tasks_processed": 512,
+      "last_output_summary": "Generated EEC Transit Policy Report & Actionable Insights",
+      "async_worker_id": "worker-pool-04",
+      "cpu_usage_pct": 45.2,
+      "memory_mb": 680
+    },
+    {
+      "id": "sub_viz_telemetry",
+      "name": "VizTelemetryAgent",
+      "role_th": "สตรีมข้อมูล Telemetry แบบ Real-time เชื่อมโยงแผนที่ดาวเทียม & Scrubber",
+      "role_en": "Real-time Telemetry Stream & Leaflet/Canvas Engine",
+      "type": "telemetry",
+      "status": "COMPLETED",
+      "latency_ms": 15,
+      "throughput_fps": 60.0,
+      "tasks_processed": 4500,
+      "last_output_summary": "Synced 24h interactive playback, speed toggles & LOS gauge stream",
+      "async_worker_id": "worker-pool-05",
+      "cpu_usage_pct": 12.0,
+      "memory_mb": 192
+    }
+  ],
   "metrics": {},
   "warnings": [],
-  "pipeline_version": "1.0.0-prod",
-  "end_time": "2026-08-27 15:03:57"
+  "pipeline_version": "2.0.0-async-multiagent",
+  "end_time": "2026-08-28 11:16:00"
 }

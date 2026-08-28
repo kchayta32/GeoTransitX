@@ -4,6 +4,14 @@ import argparse
 import webbrowser
 from pathlib import Path
 
+# Ensure UTF-8 output encoding on Windows console
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 # Add python_pipeline to path
 sys.path.insert(0, str(Path(__file__).resolve().parent / "python_pipeline"))
 

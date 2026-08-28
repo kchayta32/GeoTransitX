@@ -5,12 +5,23 @@ from pathlib import Path
 from PIL import Image
 import pypdf
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from config import (
     ORTHOPHOTO_PATH,
     REPORT_PDF_PATH,
     PUBLIC_DATA_DIR,
     UTM_ZONE,
-    UTM_NORTHERN
+    UTM_NORTHERN,
+    LAND_USE_GEOJSON,
+    BUFFER_RUNWAY_GEOJSON,
+    SKETCHES_RUNWAY_GEOJSON,
+    SKETCHES_LOTUS_GEOJSON
 )
 
 def utm_to_latlon(easting, northing, zone=47, northern=True):
@@ -250,22 +261,133 @@ class DataAgent:
         print("[DataAgent] Saved gcps.geojson")
         return gcp_geojson
 
+    def process_webodm_layers(self):
+        print("[DataAgent] Processing WebODM Survey Layers (Land Use, Runway Buffer, Sketches)...")
+        
+        # 1. Land Use Processing
+        land_use_data = {"type": "FeatureCollection", "features": []}
+        land_use_stats = {
+            "total_features": 0,
+            "total_area_sq_m": 0.0,
+            "total_area_rai": 0.0,
+            "categories": {
+                "u": {"code": "u", "name_th": "ย่านเมือง พาณิชยกรรม และโครงสร้างพื้นฐาน", "name_en": "Urban & Built-up Land", "color": "#f59e0b", "features_count": 0, "area_sq_m": 0.0, "area_rai": 0.0, "percentage": 0.0},
+                "a": {"code": "a", "name_th": "พื้นที่เกษตรกรรม (พืช/ปศุสัตว์)", "name_en": "Agricultural Land", "color": "#84cc16", "features_count": 0, "area_sq_m": 0.0, "area_rai": 0.0, "percentage": 0.0},
+                "f": {"code": "f", "name_th": "ป่าไม้ธรรมชาติ ป่าปลูก และพื้นที่อนุรักษ์", "name_en": "Forest Land", "color": "#10b981", "features_count": 0, "area_sq_m": 0.0, "area_rai": 0.0, "percentage": 0.0},
+                "w": {"code": "w", "name_th": "แหล่งน้ำ คลอง บึง อ่างเก็บน้ำ", "name_en": "Water Bodies", "color": "#06b6d4", "features_count": 0, "area_sq_m": 0.0, "area_rai": 0.0, "percentage": 0.0},
+                "m": {"code": "m", "name_th": "พื้นที่เบ็ดเตล็ด / รกร้าง", "name_en": "Miscellaneous Land", "color": "#8b5cf6", "features_count": 0, "area_sq_m": 0.0, "area_rai": 0.0, "percentage": 0.0}
+            }
+        }
+        
+        if LAND_USE_GEOJSON.exists():
+            with open(LAND_USE_GEOJSON, "r", encoding="utf-8") as f:
+                raw_lu = json.load(f)
+                
+            for feat in raw_lu.get("features", []):
+                props = feat.get("properties", {})
+                cat_code = str(props.get("type", "m")).lower()
+                area_sq_m = float(props.get("area", 0.0))
+                area_rai = round(area_sq_m / 1600.0, 3)
+                
+                cat_meta = land_use_stats["categories"].get(cat_code, land_use_stats["categories"]["m"])
+                cat_meta["features_count"] += 1
+                cat_meta["area_sq_m"] += area_sq_m
+                land_use_stats["total_area_sq_m"] += area_sq_m
+                
+                # Enrich feature properties
+                props["category_code"] = cat_code
+                props["category_name_th"] = cat_meta["name_th"]
+                props["category_name_en"] = cat_meta["name_en"]
+                props["color"] = cat_meta["color"]
+                props["area_sq_m"] = round(area_sq_m, 2)
+                props["area_rai"] = area_rai
+                feat["properties"] = props
+                land_use_data["features"].append(feat)
+                
+            # Calculate percentages
+            total_sqm = land_use_stats["total_area_sq_m"]
+            land_use_stats["total_features"] = len(land_use_data["features"])
+            land_use_stats["total_area_rai"] = round(total_sqm / 1600.0, 2)
+            
+            for code, cat in land_use_stats["categories"].items():
+                cat["area_sq_m"] = round(cat["area_sq_m"], 2)
+                cat["area_rai"] = round(cat["area_sq_m"] / 1600.0, 3)
+                cat["percentage"] = round((cat["area_sq_m"] / total_sqm * 100.0), 2) if total_sqm > 0 else 0.0
+                
+            with open(PUBLIC_DATA_DIR / "land_use.geojson", "w", encoding="utf-8") as f:
+                json.dump(land_use_data, f, indent=2, ensure_ascii=False)
+            print(f"[DataAgent] Saved land_use.geojson with {len(land_use_data['features'])} features (Total: {total_sqm:,.1f} m²)")
+        
+        # 2. Runway Buffer Safety Zone
+        runway_buffer_data = {"type": "FeatureCollection", "features": []}
+        buffer_summary = {"area_sq_m": 0.0, "length_m": 0.0, "cost_thb": 0.0}
+        if BUFFER_RUNWAY_GEOJSON.exists():
+            with open(BUFFER_RUNWAY_GEOJSON, "r", encoding="utf-8") as f:
+                raw_buf = json.load(f)
+            for feat in raw_buf.get("features", []):
+                props = feat.get("properties", {})
+                props["zone_type"] = "Runway Safety Buffer (เขตปลอดภัยทางวิ่ง)"
+                props["color"] = "#ef4444"
+                props["fill_opacity"] = 0.25
+                props["risk_level"] = "CRITICAL_RESTRICTED"
+                buffer_summary["area_sq_m"] = props.get("area", 145056.18)
+                buffer_summary["length_m"] = props.get("length", 926.87)
+                buffer_summary["cost_thb"] = props.get("cost", 261101122.2)
+                feat["properties"] = props
+                runway_buffer_data["features"].append(feat)
+                
+            with open(PUBLIC_DATA_DIR / "runway_buffer.geojson", "w", encoding="utf-8") as f:
+                json.dump(runway_buffer_data, f, indent=2, ensure_ascii=False)
+            print("[DataAgent] Saved runway_buffer.geojson")
+            
+        # 3. Runway Centerline Sketches
+        runway_sketch_data = {"type": "FeatureCollection", "features": []}
+        if SKETCHES_RUNWAY_GEOJSON.exists():
+            with open(SKETCHES_RUNWAY_GEOJSON, "r", encoding="utf-8") as f:
+                raw_rw = json.load(f)
+            for feat in raw_rw.get("features", []):
+                props = feat.get("properties", {})
+                props["runway_id"] = "RW-03/21"
+                props["name_th"] = "ทางวิ่งหลัก สนามบินบางพระ"
+                props["color"] = "#38bdf8"
+                feat["properties"] = props
+                runway_sketch_data["features"].append(feat)
+            with open(PUBLIC_DATA_DIR / "runway_sketch.geojson", "w", encoding="utf-8") as f:
+                json.dump(runway_sketch_data, f, indent=2, ensure_ascii=False)
+            print("[DataAgent] Saved runway_sketch.geojson")
+            
+        # 4. Survey Markers (Lotus)
+        if SKETCHES_LOTUS_GEOJSON.exists():
+            with open(SKETCHES_LOTUS_GEOJSON, "r", encoding="utf-8") as f:
+                raw_lotus = json.load(f)
+            with open(PUBLIC_DATA_DIR / "survey_markers.geojson", "w", encoding="utf-8") as f:
+                json.dump(raw_lotus, f, indent=2, ensure_ascii=False)
+            print(f"[DataAgent] Saved survey_markers.geojson ({len(raw_lotus.get('features', []))} markers)")
+            
+        return {
+            "land_use_stats": land_use_stats,
+            "buffer_summary": buffer_summary,
+            "survey_marker_count": len(raw_lotus.get('features', [])) if SKETCHES_LOTUS_GEOJSON.exists() else 0
+        }
+
     def run(self):
         print("=== [DataAgent] STARTING INGESTION & GEOREFERENCING ===")
         report_data = self.parse_pdf_report()
         geo_info = self.process_orthophoto()
         gcp_geojson = self.generate_gcp_geojson(report_data, geo_info)
+        webodm_summary = self.process_webodm_layers()
         
         combined_metadata = {
             "dataset_name": "Bang Phra Airport Smart Transit & Aviation GeoAI Survey",
             "location": "Bang Phra Airport (สนามบินบางพระ), Chon Buri, Thailand",
             "report_summary": report_data,
-            "georeferencing": geo_info
+            "georeferencing": geo_info,
+            "webodm_summary": webodm_summary
         }
         
         with open(PUBLIC_DATA_DIR / "dataset_metadata.json", "w", encoding="utf-8") as f:
             json.dump(combined_metadata, f, indent=2, ensure_ascii=False)
-        print("[DataAgent] Successfully generated dataset_metadata.json")
+        print("[DataAgent] Successfully generated dataset_metadata.json with WebODM summary")
         print("=== [DataAgent] TASK COMPLETED ===")
         return combined_metadata
 

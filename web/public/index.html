@@ -186,38 +186,76 @@
       <div class="relative w-full h-[620px] rounded-xl overflow-hidden border border-slate-800 bg-[#0b1329] shadow-2xl">
         <div id="leaflet-map" class="w-full h-full z-0"></div>
 
-        <!-- Layer Control Box -->
-        <div class="absolute top-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md p-3 rounded-lg border border-slate-700 shadow-lg text-xs space-y-2 max-w-xs">
+        <!-- Layer & Basemap Control Box -->
+        <div class="absolute top-4 left-4 z-[1000] bg-slate-900/95 backdrop-blur-md p-3.5 rounded-xl border border-slate-750 shadow-2xl text-xs space-y-3 max-w-xs max-h-[90%] overflow-y-auto">
           <div class="flex items-center justify-between font-semibold text-slate-200 border-b border-slate-800 pb-1.5">
-            <span class="flex items-center gap-1"><i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i> ชั้นข้อมูล GIS</span>
-            <span class="text-[10px] text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800">Live</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i> แผนที่ & WebODM AI</span>
+            <span class="text-[10px] text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800 font-mono">Live GIS</span>
           </div>
-          <div class="space-y-1.5 pt-1">
+
+          <!-- Basemap Switcher -->
+          <div class="space-y-1">
+            <div class="text-[11px] font-semibold text-slate-300">บริการแผนที่ฟรี:</div>
+            <div class="grid grid-cols-2 gap-1 font-mono text-[10px]">
+              <button onclick="switchPublicBasemap('google_hybrid')" id="bm-google_hybrid" class="px-2 py-1 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-600 font-bold">🛰️ Google Hybrid</button>
+              <button onclick="switchPublicBasemap('google_satellite')" id="bm-google_satellite" class="px-2 py-1 rounded bg-slate-800/80 text-slate-400 border border-slate-700">🌍 Google Sat HD</button>
+              <button onclick="switchPublicBasemap('esri_satellite')" id="bm-esri_satellite" class="px-2 py-1 rounded bg-slate-800/80 text-slate-400 border border-slate-700">🗺️ Esri Imagery</button>
+              <button onclick="switchPublicBasemap('carto_dark')" id="bm-carto_dark" class="px-2 py-1 rounded bg-slate-800/80 text-slate-400 border border-slate-700">🌃 Carto Dark</button>
+            </div>
+          </div>
+
+          <!-- Real-Time Traffic Toggle -->
+          <div class="pt-1.5 border-t border-slate-800">
+            <label class="flex items-center justify-between cursor-pointer bg-emerald-950/70 p-1.5 rounded-lg border border-emerald-800/80 text-emerald-300 font-semibold text-[11px]">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>🚦 Real-Time Traffic สด</span>
+              </span>
+              <input type="checkbox" id="layer-traffic" checked onchange="toggleMapLayer('traffic')" class="accent-emerald-500" />
+            </label>
+          </div>
+
+          <!-- WebODM Layers -->
+          <div class="space-y-1.5 pt-1.5 border-t border-slate-800">
+            <div class="text-[11px] font-semibold text-slate-300">ชั้นข้อมูลสำรวจ WebODM:</div>
             <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
-              <span>📸 Orthophoto (ODX v3.8.2)</span>
+              <span>📸 ภาพโดรน Orthophoto (ODX)</span>
               <input type="checkbox" id="layer-ortho" checked onchange="toggleMapLayer('ortho')" class="accent-emerald-500" />
             </label>
+            <label class="flex items-center justify-between cursor-pointer text-amber-300 hover:text-amber-200">
+              <span>🏘️ Land Use 5 โซน (u, a, f, w, m)</span>
+              <input type="checkbox" id="layer-landuse" checked onchange="toggleMapLayer('landuse')" class="accent-amber-500" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-red-400 hover:text-red-300 font-semibold">
+              <span>🛡️ เขตความปลอดภัย Runway Buffer</span>
+              <input type="checkbox" id="layer-runwaybuffer" checked onchange="toggleMapLayer('runwaybuffer')" class="accent-red-500" />
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-sky-300 hover:text-white">
+              <span>✈️ แกนทางวิ่ง Runway 03/21</span>
+              <input type="checkbox" id="layer-runwaysketch" checked onchange="toggleMapLayer('runwaysketch')" class="accent-sky-500" />
+            </label>
+          </div>
+
+          <!-- GeoAI & Infrastructure Layers -->
+          <div class="space-y-1.5 pt-1.5 border-t border-slate-800">
+            <div class="text-[11px] font-semibold text-slate-300">GeoAI & โครงสร้างพื้นฐาน:</div>
             <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
-              <span>🚗 GeoAI Detections (30 รายการ)</span>
+              <span>🚗 GeoAI Detections (30 วัตถุ)</span>
               <input type="checkbox" id="layer-detections" checked onchange="toggleMapLayer('detections')" class="accent-emerald-500" />
             </label>
             <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
-              <span>🅿️ ลานจอดรถ & Apron</span>
+              <span>🅿️ ลานจอด & Apron</span>
               <input type="checkbox" id="layer-parking" checked onchange="toggleMapLayer('parking')" class="accent-emerald-500" />
             </label>
             <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
-              <span>🛣️ โครงข่ายเส้นทาง & Runway</span>
-              <input type="checkbox" id="layer-network" checked onchange="toggleMapLayer('network')" class="accent-emerald-500" />
-            </label>
-            <label class="flex items-center justify-between cursor-pointer text-slate-300 hover:text-white">
-              <span>🎯 จุดควบคุม GCP (5 จุด)</span>
+              <span>🎯 จุดควบคุม GCP (1.3cm)</span>
               <input type="checkbox" id="layer-gcps" checked onchange="toggleMapLayer('gcps')" class="accent-emerald-500" />
             </label>
           </div>
 
-          <div class="pt-2 border-t border-slate-800">
+          <div class="pt-1.5 border-t border-slate-800">
             <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-              <span>ความโปร่งใสภาพ Ortho:</span>
+              <span>ความโปร่งใสภาพโดรน:</span>
               <span id="opacity-label" class="font-mono text-emerald-400">90%</span>
             </div>
             <input type="range" min="0" max="1" step="0.05" value="0.9" oninput="changeOrthoOpacity(this.value)" class="w-full h-1.5 bg-slate-700 rounded-lg accent-emerald-500" />
@@ -225,12 +263,12 @@
         </div>
 
         <!-- Legend Box -->
-        <div class="absolute bottom-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md px-3 py-2 rounded-lg border border-slate-700 text-[11px] flex items-center gap-4 text-slate-300 shadow-md">
+        <div class="absolute bottom-4 left-4 z-[1000] bg-slate-900/90 backdrop-blur-md px-3 py-2 rounded-lg border border-slate-700 text-[11px] flex flex-wrap items-center gap-4 text-slate-300 shadow-md">
           <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> รถยนต์</div>
           <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> เครื่องบิน</div>
-          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span> รถบรรทุก</div>
-          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500 ring-2 ring-white/50"></span> จุด GCP</div>
-          <div class="flex items-center gap-1.5"><span class="w-3 h-1 bg-pink-500"></span> Runway 03/21</div>
+          <div class="flex items-center gap-1.5"><span class="w-3 h-2 bg-amber-500/50 border border-amber-500"></span> (u) Urban</div>
+          <div class="flex items-center gap-1.5"><span class="w-3 h-2 bg-red-500/30 border border-red-500 border-dashed"></span> Runway Buffer</div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500 ring-2 ring-white/50"></span> GCP (1.3cm)</div>
         </div>
       </div>
     </div>
@@ -508,8 +546,10 @@
   <!-- JavaScript Application Logic -->
   <script>
     let map, orthoLayer, detectionLayer, parkingLayer, networkLayer, gcpLayer;
+    let landUseLayer, runwayBufferLayer, runwaySketchLayer, liveTrafficLayer;
+    let basemaps = {}, currentBasemap = 'google_hybrid';
     let simData = null, rawReportMarkdown = '';
-    let simIndex = 9, isSimPlaying = false, simSpeed = 1, simInterval = null;
+    let simIndex = 16, isSimPlaying = false, simSpeed = 1, simInterval = null;
 
     async function initApp() {
       lucide.createIcons();
@@ -522,16 +562,19 @@
 
     async function loadAllData() {
       try {
-        const [meta, det, net, pkg, gcp, sim, rep] = await Promise.all([
+        const [meta, det, net, pkg, gcp, lu, buf, rw, sim, rep] = await Promise.all([
           fetch('/data/dataset_metadata.json').then(r => r.json()),
           fetch('/data/detections.geojson').then(r => r.json()),
           fetch('/data/network.geojson').then(r => r.json()),
           fetch('/data/parking.geojson').then(r => r.json()),
           fetch('/data/gcps.geojson').then(r => r.json()),
+          fetch('/data/land_use.geojson').then(r => (r.ok ? r.json() : null)),
+          fetch('/data/runway_buffer.geojson').then(r => (r.ok ? r.json() : null)),
+          fetch('/data/runway_sketch.geojson').then(r => (r.ok ? r.json() : null)),
           fetch('/data/traffic_simulation.json').then(r => r.json()),
           fetch('/data/policy_report.json').then(r => r.json())
         ]);
-        window.appData = { meta, det, net, pkg, gcp, sim, rep };
+        window.appData = { meta, det, net, pkg, gcp, lu, buf, rw, sim, rep };
         simData = sim;
         rawReportMarkdown = rep.markdown_content;
       } catch (e) {
@@ -561,13 +604,55 @@
       const center = window.appData?.meta?.georeferencing?.center_wgs84 || [13.232422, 100.955190];
       map = L.map('leaflet-map', { center: center, zoom: 17, minZoom: 14, maxZoom: 21, attributionControl: false });
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 20 }).addTo(map);
+      // 1. Free Basemaps Setup
+      basemaps = {
+        google_hybrid: L.tileLayer('https://mt0.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { maxZoom: 21 }),
+        google_satellite: L.tileLayer('https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', { maxZoom: 21 }),
+        esri_satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 20 }),
+        carto_dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 20 })
+      };
+      basemaps.google_hybrid.addTo(map);
 
-      // Orthophoto
+      // 2. Real-time Traffic Stream
+      liveTrafficLayer = L.tileLayer('https://mt0.google.com/vt/lyrs=m,traffic&x={x}&y={y}&z={z}&style=15', {
+        maxZoom: 21, opacity: 0.85, zIndex: 350
+      }).addTo(map);
+
+      // 3. Orthophoto
       const bounds = window.appData?.meta?.georeferencing?.bounds_wgs84 || [[13.230275, 100.953076], [13.234600, 100.957303]];
-      orthoLayer = L.imageOverlay('/data/orthophoto_web.png', bounds, { opacity: 0.9 }).addTo(map);
+      orthoLayer = L.imageOverlay('/data/orthophoto_web.png', bounds, { opacity: 0.9, zIndex: 200 }).addTo(map);
 
-      // Parking
+      // 4. WebODM Land Use (u, a, f, w, m)
+      landUseLayer = L.layerGroup().addTo(map);
+      const luColors = { u: '#f59e0b', a: '#84cc16', f: '#10b981', w: '#06b6d4', m: '#a855f7' };
+      window.appData?.lu?.features?.forEach(f => {
+        const cat = (f.properties?.category_code || 'm').toLowerCase();
+        const col = luColors[cat] || '#a855f7';
+        const coords = f.geometry?.coordinates;
+        if (f.geometry?.type === 'Polygon') {
+          const poly = L.polygon(coords[0].map(c => [c[1], c[0]]), { color: col, weight: 1.5, fillColor: col, fillOpacity: 0.35, dashArray: '3, 3' });
+          poly.bindTooltip('<b>' + (f.properties.name || 'Land Parcel') + '</b> (' + (f.properties.category_name_th || cat) + ')<br/>พื้นที่: ' + (f.properties.area_sq_m || f.properties.area) + ' ตร.ม.');
+          landUseLayer.addLayer(poly);
+        }
+      });
+
+      // 5. WebODM Runway Safety Buffer
+      runwayBufferLayer = L.layerGroup().addTo(map);
+      window.appData?.buf?.features?.forEach(f => {
+        const poly = L.polygon(f.geometry.coordinates[0].map(c => [c[1], c[0]]), { color: '#ef4444', weight: 2, fillColor: '#ef4444', fillOpacity: 0.2, dashArray: '6, 4' });
+        poly.bindTooltip('🛡️ <b>เขตความปลอดภัยทางวิ่ง (Runway Buffer)</b><br/>พื้นที่: ' + Number(f.properties.area || 145056).toLocaleString() + ' ตร.ม.');
+        runwayBufferLayer.addLayer(poly);
+      });
+
+      // 6. WebODM Runway Sketch Centerline
+      runwaySketchLayer = L.layerGroup().addTo(map);
+      window.appData?.rw?.features?.forEach(f => {
+        const line = L.polyline(f.geometry.coordinates.map(c => [c[1], c[0]]), { color: '#38bdf8', weight: 4, dashArray: '8, 6' });
+        line.bindTooltip('✈️ <b>ทางวิ่ง Runway 03/21</b> (926.87 m)');
+        runwaySketchLayer.addLayer(line);
+      });
+
+      // 7. Parking
       parkingLayer = L.layerGroup().addTo(map);
       window.appData?.pkg?.features?.forEach(f => {
         const occ = f.properties.occupancy_rate_pct;
@@ -577,7 +662,7 @@
         parkingLayer.addLayer(poly);
       });
 
-      // Network
+      // 8. Network
       networkLayer = L.layerGroup().addTo(map);
       window.appData?.net?.features?.forEach(f => {
         const isRunway = f.properties.road_type.includes('Runway');
@@ -587,34 +672,55 @@
         networkLayer.addLayer(line);
       });
 
-      // GCPs
+      // 9. GCPs
       gcpLayer = L.layerGroup().addTo(map);
       window.appData?.gcp?.features?.forEach(f => {
         const [lon, lat] = f.geometry.coordinates;
         const m = L.circleMarker([lat, lon], { radius: 8, fillColor: '#ef4444', color: '#fff', weight: 2, fillOpacity: 0.9 });
-        m.bindTooltip('<b>' + f.properties.id + '</b><br/>3D Error: ' + f.properties.total_3d_error_mm + ' mm');
+        m.bindTooltip('<b>' + f.properties.id + '</b><br/>3D Error: ' + f.properties.total_3d_error_mm + ' mm (1.3cm)');
         gcpLayer.addLayer(m);
       });
 
-      // Detections
+      // 10. Detections & Segments
       detectionLayer = L.layerGroup().addTo(map);
       window.appData?.det?.features?.forEach(f => {
         const [lon, lat] = f.geometry.coordinates;
         const cls = f.properties.class;
-        const color = cls === 'airplane' ? '#a855f7' : (cls === 'truck' ? '#f97316' : '#3b82f6');
+        const isRisk = f.properties.risk_alert === 'RUNWAY_BUFFER_INTRUSION_WARNING';
+        const color = isRisk ? '#ef4444' : (cls === 'airplane' ? '#a855f7' : (cls === 'truck' ? '#f97316' : '#3b82f6'));
         const m = L.circleMarker([lat, lon], { radius: cls === 'airplane' ? 8 : 5, fillColor: color, color: '#fff', weight: 1.5, fillOpacity: 0.85 });
-        m.bindTooltip('<b>' + f.properties.object_id + '</b> (' + cls + ')<br/>ความเชื่อมั่น: ' + (f.properties.confidence * 100).toFixed(1) + '%');
+        m.bindTooltip('<b>' + f.properties.object_id + '</b> (' + cls + ')<br/>ความเชื่อมั่น: ' + (f.properties.confidence * 100).toFixed(1) + '%' + (isRisk ? '<br/><span style="color:#ef4444;font-weight:bold;">⚠️ เสี่ยงรุกล้ำ Runway Buffer</span>' : ''));
         detectionLayer.addLayer(m);
+      });
+    }
+
+    function switchPublicBasemap(type) {
+      if (!map || !basemaps[type]) return;
+      Object.values(basemaps).forEach(l => { if (map.hasLayer(l)) map.removeLayer(l); });
+      basemaps[type].addTo(map).bringToBack();
+      currentBasemap = type;
+      ['google_hybrid', 'google_satellite', 'esri_satellite', 'carto_dark'].forEach(k => {
+        const el = document.getElementById('bm-' + k);
+        if (!el) return;
+        if (k === type) {
+          el.className = 'px-2 py-1 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-600 font-bold';
+        } else {
+          el.className = 'px-2 py-1 rounded bg-slate-800/80 text-slate-400 border border-slate-700';
+        }
       });
     }
 
     function toggleMapLayer(layerId) {
       const isChecked = document.getElementById('layer-' + layerId).checked;
-      if (layerId === 'ortho') isChecked ? map.addLayer(orthoLayer) : map.removeLayer(orthoLayer);
-      if (layerId === 'detections') isChecked ? map.addLayer(detectionLayer) : map.removeLayer(detectionLayer);
-      if (layerId === 'parking') isChecked ? map.addLayer(parkingLayer) : map.removeLayer(parkingLayer);
-      if (layerId === 'network') isChecked ? map.addLayer(networkLayer) : map.removeLayer(networkLayer);
-      if (layerId === 'gcps') isChecked ? map.addLayer(gcpLayer) : map.removeLayer(gcpLayer);
+      if (layerId === 'traffic' && liveTrafficLayer) isChecked ? map.addLayer(liveTrafficLayer) : map.removeLayer(liveTrafficLayer);
+      if (layerId === 'ortho' && orthoLayer) isChecked ? map.addLayer(orthoLayer) : map.removeLayer(orthoLayer);
+      if (layerId === 'landuse' && landUseLayer) isChecked ? map.addLayer(landUseLayer) : map.removeLayer(landUseLayer);
+      if (layerId === 'runwaybuffer' && runwayBufferLayer) isChecked ? map.addLayer(runwayBufferLayer) : map.removeLayer(runwayBufferLayer);
+      if (layerId === 'runwaysketch' && runwaySketchLayer) isChecked ? map.addLayer(runwaySketchLayer) : map.removeLayer(runwaySketchLayer);
+      if (layerId === 'detections' && detectionLayer) isChecked ? map.addLayer(detectionLayer) : map.removeLayer(detectionLayer);
+      if (layerId === 'parking' && parkingLayer) isChecked ? map.addLayer(parkingLayer) : map.removeLayer(parkingLayer);
+      if (layerId === 'network' && networkLayer) isChecked ? map.addLayer(networkLayer) : map.removeLayer(networkLayer);
+      if (layerId === 'gcps' && gcpLayer) isChecked ? map.addLayer(gcpLayer) : map.removeLayer(gcpLayer);
     }
 
     function changeOrthoOpacity(val) {

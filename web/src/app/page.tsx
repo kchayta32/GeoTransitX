@@ -22,57 +22,85 @@ import {
   Radio,
   CheckCircle2,
   RefreshCw,
+  Flame
 } from "lucide-react";
+import { initFirebaseAnalytics } from "@/lib/firebase";
 
 import AnalyticsPanel from "@/components/AnalyticsPanel";
 import PolicyReportViewer from "@/components/PolicyReportViewer";
 import TyphoonChat from "@/components/TyphoonChat";
 import GcpQualityModal from "@/components/GcpQualityModal";
+import PresentationPosterModal from "@/components/PresentationPosterModal";
+import MultiAgentControlPanel from "@/components/MultiAgentControlPanel";
 
 // Dynamically import client-only components
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 const SimulationCanvas = dynamic(() => import("@/components/SimulationCanvas"), { ssr: false });
 
 export default function GeoTransitXDashboard() {
-  const [activeTab, setActiveTab] = useState<"map" | "simulation" | "analytics" | "report" | "chat">("map");
+  const [activeTab, setActiveTab] = useState<"map" | "simulation" | "agents" | "analytics" | "report" | "chat">("simulation");
   const [isGcpModalOpen, setIsGcpModalOpen] = useState<boolean>(false);
+  const [isPosterModalOpen, setIsPosterModalOpen] = useState<boolean>(false);
 
   const [metadata, setMetadata] = useState<DatasetMetadata | null>(null);
   const [detections, setDetections] = useState<any | null>(null);
   const [network, setNetwork] = useState<any | null>(null);
   const [parking, setParking] = useState<any | null>(null);
   const [gcps, setGcps] = useState<any | null>(null);
+  const [landUse, setLandUse] = useState<any | null>(null);
+  const [runwayBuffer, setRunwayBuffer] = useState<any | null>(null);
+  const [runwaySketch, setRunwaySketch] = useState<any | null>(null);
   const [simulationData, setSimulationData] = useState<SimulationData | null>(null);
   const [policyReport, setPolicyReport] = useState<PolicyReportData | null>(null);
   const [orchestratorStatus, setOrchestratorStatus] = useState<OrchestratorStatus | null>(null);
 
-  // Load all pre-processed pipeline data from public/data
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const [metaRes, detRes, netRes, pkgRes, gcpRes, simRes, repRes, orchRes] = await Promise.all([
-          fetch("/data/dataset_metadata.json").then((r) => r.json()),
-          fetch("/data/detections.geojson").then((r) => r.json()),
-          fetch("/data/network.geojson").then((r) => r.json()),
-          fetch("/data/parking.geojson").then((r) => r.json()),
-          fetch("/data/gcps.geojson").then((r) => r.json()),
-          fetch("/data/traffic_simulation.json").then((r) => r.json()),
-          fetch("/data/policy_report.json").then((r) => r.json()),
-          fetch("/data/orchestrator_status.json").then((r) => (r.ok ? r.json() : null)),
-        ]);
+  const loadData = async () => {
+    try {
+      const [
+        metaRes,
+        detRes,
+        netRes,
+        pkgRes,
+        gcpRes,
+        luRes,
+        bufRes,
+        rwRes,
+        simRes,
+        repRes,
+        orchRes,
+      ] = await Promise.all([
+        fetch("/data/dataset_metadata.json").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/detections.geojson").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/network.geojson").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/parking.geojson").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/gcps.geojson").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/land_use.geojson").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/runway_buffer.geojson").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/runway_sketch.geojson").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/traffic_simulation.json").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/policy_report.json").then((r) => (r.ok ? r.json() : null)),
+        fetch("/data/orchestrator_status.json").then((r) => (r.ok ? r.json() : null)),
+      ]);
 
-        setMetadata(metaRes);
-        setDetections(detRes);
-        setNetwork(netRes);
-        setParking(pkgRes);
-        setGcps(gcpRes);
-        setSimulationData(simRes);
-        setPolicyReport(repRes);
-        setOrchestratorStatus(orchRes);
-      } catch (err) {
-        console.error("Error loading GeoTransitX data files:", err);
-      }
+      setMetadata(metaRes);
+      setDetections(detRes);
+      setNetwork(netRes);
+      setParking(pkgRes);
+      setGcps(gcpRes);
+      setLandUse(luRes);
+      setRunwayBuffer(bufRes);
+      setRunwaySketch(rwRes);
+      setSimulationData(simRes);
+      setPolicyReport(repRes);
+      setOrchestratorStatus(orchRes);
+    } catch (err) {
+      console.error("Error loading GeoTransitX data files:", err);
     }
+  };
+
+  // Initialize Firebase and load all pre-processed pipeline and WebODM data
+  useEffect(() => {
+    initFirebaseAnalytics().catch((err) => console.warn("Firebase Init:", err));
     loadData();
   }, []);
 
@@ -92,10 +120,10 @@ export default function GeoTransitXDashboard() {
                   GEOTRANSIT<span className="text-emerald-400">X</span>
                 </h1>
                 <span className="text-[10px] bg-emerald-950/80 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-mono font-bold">
-                  v1.0 AI Engine
+                  v2.0 Multi-Agent
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400">Predictive Traffic & Transit Management System</p>
+              <p className="text-[11px] text-slate-400">Predictive Traffic & Smart Transit AI System</p>
             </div>
           </div>
 
@@ -103,30 +131,38 @@ export default function GeoTransitXDashboard() {
           <div className="hidden md:flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-mono">
             <div className="flex items-center gap-1.5 text-slate-300">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span className="text-slate-400">Agents:</span>
+              <span className="text-slate-400">Primary:</span>
             </div>
             <span className="px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-300 border border-emerald-800/60">
-              DataAgent: OK
+              SatVision: OK
             </span>
             <span className="px-2 py-0.5 rounded bg-blue-950/70 text-blue-300 border border-blue-800/60">
-              AIAgent: OK
+              TrafficSim: 24h
             </span>
             <span className="px-2 py-0.5 rounded bg-purple-950/70 text-purple-300 border border-purple-800/60">
-              Typhoon LLM: 30B
+              Typhoon: 30B
             </span>
             <span className="px-2 py-0.5 rounded bg-teal-950/70 text-teal-300 border border-teal-800/60">
-              VizAgent: OK
+              GeoTwin: OK
             </span>
           </div>
 
-          {/* Action Header Button */}
+          {/* Action Header Buttons */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsPosterModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-2 text-xs bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-xl transition shadow-lg shadow-emerald-950/40"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>📊 สไลด์นำเสนอ & BMC (16:9)</span>
+            </button>
+
             <button
               onClick={() => setIsGcpModalOpen(true)}
               className="flex items-center gap-1.5 px-3 py-2 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition shadow"
             >
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>GCP Accuracy (1.3cm)</span>
+              <span>GCP (1.3cm)</span>
             </button>
           </div>
         </div>
@@ -165,6 +201,30 @@ export default function GeoTransitXDashboard() {
       <div className="bg-[#0c1222]/80 border-b border-slate-800 px-4 lg:px-8">
         <div className="max-w-7xl mx-auto flex gap-2 overflow-x-auto no-scrollbar py-2">
           <button
+            onClick={() => setActiveTab("simulation")}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition shrink-0 ${
+              activeTab === "simulation"
+                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40"
+                : "bg-slate-900/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+            }`}
+          >
+            <Activity className="w-4 h-4" />
+            <span>🚦 แบบจำลองจราจร 24 ชม. (Google Sat HD)</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("agents")}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition shrink-0 ${
+              activeTab === "agents"
+                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40"
+                : "bg-slate-900/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+            }`}
+          >
+            <Zap className="w-4 h-4 text-amber-400" />
+            <span>🤖 ศูนย์ควบคุม AI Multi-Agent Hub</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab("map")}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition shrink-0 ${
               activeTab === "map"
@@ -174,18 +234,6 @@ export default function GeoTransitXDashboard() {
           >
             <Layers className="w-4 h-4" />
             <span>🗺️ GIS & Digital Twin (แผนที่เชิงพื้นที่)</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("simulation")}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition shrink-0 ${
-              activeTab === "simulation"
-                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40"
-                : "bg-slate-900/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800"
-            }`}
-          >
-            <Activity className="w-4 h-4" />
-            <span>🚦 แบบจำลองการจราจร 24 ชม. (Simulation)</span>
           </button>
 
           <button
@@ -228,6 +276,25 @@ export default function GeoTransitXDashboard() {
 
       {/* 4. Tab Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8">
+        {activeTab === "simulation" && (
+          <SimulationCanvas
+            simulationData={simulationData}
+            landUse={landUse}
+            runwayBuffer={runwayBuffer}
+            runwaySketch={runwaySketch}
+            network={network}
+            parking={parking}
+            detections={detections}
+          />
+        )}
+
+        {activeTab === "agents" && (
+          <MultiAgentControlPanel
+            orchestratorStatus={orchestratorStatus}
+            onTriggerReSimulation={loadData}
+          />
+        )}
+
         {activeTab === "map" && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -246,12 +313,11 @@ export default function GeoTransitXDashboard() {
               network={network}
               parking={parking}
               gcps={gcps}
+              landUse={landUse}
+              runwayBuffer={runwayBuffer}
+              runwaySketch={runwaySketch}
             />
           </div>
-        )}
-
-        {activeTab === "simulation" && (
-          <SimulationCanvas simulationData={simulationData} />
         )}
 
         {activeTab === "analytics" && (
@@ -282,7 +348,9 @@ export default function GeoTransitXDashboard() {
             </p>
           </div>
           <div className="flex items-center gap-4 text-[11px]">
-            <span>Orchestration: Antigravity Multi-Agent</span>
+            <span>Orchestration: Primary Agent & 5 Async Subagents</span>
+            <span>•</span>
+            <span>Basemap: Google Satellite HD Stream</span>
             <span>•</span>
             <span>LLM: OpenTyphoon (typhoon-v2.5-30b-a3b)</span>
             <span>•</span>
@@ -297,6 +365,13 @@ export default function GeoTransitXDashboard() {
         onClose={() => setIsGcpModalOpen(false)}
         metadata={metadata}
       />
+
+      {/* Presentation & Marketing Poster Modal */}
+      <PresentationPosterModal
+        isOpen={isPosterModalOpen}
+        onClose={() => setIsPosterModalOpen(false)}
+      />
     </div>
   );
 }
+

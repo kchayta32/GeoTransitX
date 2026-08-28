@@ -238,33 +238,62 @@ export default function AnalyticsPanel({ simulationData, metadata, parkingData }
         </div>
       </div>
 
-      {/* Photogrammetry & Drone Survey Quality Details Table */}
+      {/* WebODM Land Use & Photogrammetry Survey Diagnostics */}
       <div className="bg-slate-900/90 border border-slate-800 p-5 rounded-xl shadow-lg space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-slate-100 text-sm">
             <Layers className="w-4 h-4 text-emerald-400" />
-            <span>สถิติการประมวลผล Photogrammetry & Drone Sensor Diagnostics (ODX v3.8.2)</span>
+            <span>สถิติการใช้ประโยชน์ที่ดิน (WebODM Land Use) & Photogrammetry Diagnostics</span>
           </div>
           <span className="text-xs text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800 font-mono">
-            Survey 100% Validated
+            WebODM Survey Validated
           </span>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+        {/* Land Use Category Breakdown */}
+        {metadata?.webodm_summary?.land_use_stats && (
+          <div className="space-y-3 pt-1">
+            <div className="flex justify-between text-xs text-slate-400">
+              <span>สัดส่วนพื้นที่การใช้ประโยชน์ที่ดิน 5 ประเภทหลัก:</span>
+              <span className="font-mono text-emerald-400 font-bold">
+                รวม {metadata.webodm_summary.land_use_stats.total_area_sq_m.toLocaleString()} ตร.ม. (
+                {metadata.webodm_summary.land_use_stats.total_area_rai} ไร่)
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
+              {Object.entries(metadata.webodm_summary.land_use_stats.categories).map(([code, cat]) => (
+                <div key={code} className="p-3 bg-slate-800/60 rounded-xl border border-slate-700/80 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-slate-200" style={{ color: cat.color }}>
+                      ({code}) {cat.name_en}
+                    </span>
+                    <span className="font-mono text-[10px] text-slate-400">{cat.percentage}%</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400 truncate">{cat.name_th}</p>
+                  <p className="font-mono font-bold text-slate-100 text-sm">{cat.area_sq_m.toLocaleString()} m²</p>
+                  <p className="text-[10px] font-mono text-emerald-400">{cat.area_rai} ไร่</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs pt-2 border-t border-slate-800">
           <div className="p-3 bg-slate-800/50 rounded-lg border border-slate-750">
-            <p className="text-slate-400">พื้นที่บินสำรวจ:</p>
+            <p className="text-slate-400">พื้นที่บินสำรวจโดรน:</p>
             <p className="text-slate-100 font-bold font-mono text-sm mt-0.5">
               {reportSummary?.area_covered_sq_m?.toLocaleString()} m² ({reportSummary?.area_covered_sq_km} km²)
             </p>
           </div>
           <div className="p-3 bg-slate-800/50 rounded-lg border border-slate-750">
-            <p className="text-slate-400">ภาพถ่ายโดรนทั้งหมด:</p>
-            <p className="text-slate-100 font-bold font-mono text-sm mt-0.5">
-              {reportSummary?.reconstruction_stats?.total_images} / {reportSummary?.reconstruction_stats?.reconstructed_images} shots (100.0%)
+            <p className="text-slate-400">เขต Runway Safety Buffer:</p>
+            <p className="text-red-400 font-bold font-mono text-sm mt-0.5">
+              {metadata?.webodm_summary?.buffer_summary?.area_sq_m?.toLocaleString() || "145,056"} m² (926.9m)
             </p>
           </div>
           <div className="p-3 bg-slate-800/50 rounded-lg border border-slate-750">
-            <p className="text-slate-400">พอยต์คลาวด์ความหนาแน่นสูง:</p>
+            <p className="text-slate-400">Dense Point Cloud:</p>
             <p className="text-slate-100 font-bold font-mono text-sm mt-0.5">
               {reportSummary?.reconstruction_stats?.dense_points?.toLocaleString()} points
             </p>

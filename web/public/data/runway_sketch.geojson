@@ -1,0 +1,31 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "__gm_id": "feature-18",
+        "__gm_shape": "line",
+        "name": "bangpra_airport",
+        "length": 926.8657,
+        "runway_id": "RW-03/21",
+        "name_th": "ทางวิ่งหลัก สนามบินบางพระ",
+        "color": "#38bdf8"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.95376123012545,
+            13.230271395999594
+          ],
+          [
+            100.96056394171666,
+            13.235333846313168
+          ]
+        ]
+      },
+      "id": "feature-18"
+    }
+  ]
+}

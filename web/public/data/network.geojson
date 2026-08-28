@@ -31,7 +31,7 @@
         "lanes": 2,
         "speed_limit_kmh": 50,
         "capacity_vph": 1200,
-        "length_m": 326.8,
+        "length_m": 318.3,
         "surface": "Asphalt Concrete"
       }
     },
@@ -61,7 +61,7 @@
         "lanes": 1,
         "speed_limit_kmh": 30,
         "capacity_vph": 450,
-        "length_m": 367.8,
+        "length_m": 561.6,
         "surface": "Asphalt Concrete"
       }
     },
@@ -99,7 +99,7 @@
         "lanes": 2,
         "speed_limit_kmh": 20,
         "capacity_vph": 600,
-        "length_m": 539.0,
+        "length_m": 369.8,
         "surface": "Asphalt Concrete"
       }
     },
@@ -125,7 +125,7 @@
         "lanes": 1,
         "speed_limit_kmh": 120,
         "capacity_vph": 30,
-        "length_m": 526.7,
+        "length_m": 280.4,
         "surface": "Asphalt Concrete"
       }
     },
@@ -151,7 +151,7 @@
         "lanes": 1,
         "speed_limit_kmh": 40,
         "capacity_vph": 50,
-        "length_m": 618.0,
+        "length_m": 548.8,
         "surface": "Asphalt Concrete"
       }
     }

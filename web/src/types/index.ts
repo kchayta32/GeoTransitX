@@ -7,13 +7,53 @@ export interface GcpProperty {
   status: string;
 }
 
+export interface LandUseProperty {
+  name: string;
+  type: string;
+  category_code: string;
+  category_name_th: string;
+  category_name_en: string;
+  color: string;
+  area: number;
+  area_sq_m: number;
+  area_rai: number;
+  __gm_id?: string;
+  __gm_shape?: string;
+}
+
+export interface RunwayBufferProperty {
+  name: string;
+  zone_type: string;
+  length: number;
+  area: number;
+  cost: number;
+  color: string;
+  fill_opacity: number;
+  risk_level: string;
+}
+
+export interface RunwaySketchProperty {
+  name: string;
+  runway_id: string;
+  name_th: string;
+  length: number;
+  color: string;
+}
+
 export interface DetectionProperty {
   object_id: string;
   class: string;
   confidence: number;
+  model_source?: string;
+  has_segmentation?: boolean;
+  land_use_zone?: string;
+  land_use_name?: string;
+  in_runway_safety_buffer?: boolean;
+  risk_alert?: string;
   pixel_coordinates: [number, number];
   wgs84_coords: [number, number];
   bbox_polygon: number[][];
+  segmentation_polygon?: number[][];
   status: string;
 }
 
@@ -42,9 +82,13 @@ export interface SimulationAgent {
   type: string;
   lat: number;
   lon: number;
+  heading?: number;
   speed_kmh: number;
   route_id: string;
+  route_name?: string;
+  in_runway_buffer?: boolean;
 }
+
 
 export interface SimulationTimelineStep {
   time: string;
@@ -59,6 +103,7 @@ export interface SimulationTimelineStep {
   congestion_pct: number;
   parking_occupancy_pct: number;
   co2_emissions_kgh: number;
+  runway_buffer_intrusion_alert?: boolean;
   active_agents: SimulationAgent[];
 }
 
@@ -178,6 +223,31 @@ export interface DatasetMetadata {
     center_wgs84: [number, number];
     web_image_url: string;
   };
+  webodm_summary?: {
+    land_use_stats: {
+      total_features: number;
+      total_area_sq_m: number;
+      total_area_rai: number;
+      categories: {
+        [code: string]: {
+          code: string;
+          name_th: string;
+          name_en: string;
+          color: string;
+          features_count: number;
+          area_sq_m: number;
+          area_rai: number;
+          percentage: number;
+        };
+      };
+    };
+    buffer_summary: {
+      area_sq_m: number;
+      length_m: number;
+      cost_thb: number;
+    };
+    survey_marker_count: number;
+  };
 }
 
 export interface OrchestratorStatus {
@@ -199,4 +269,53 @@ export interface ChatMessage {
   role: "user" | "assistant" | "system";
   content: string;
   timestamp: string;
+}
+
+export type SimulationScenarioId = "normal" | "rain" | "airshow" | "maintenance" | "green_transit";
+
+export interface SimulationScenario {
+  id: SimulationScenarioId;
+  name_th: string;
+  name_en: string;
+  icon: string;
+  description_th: string;
+  volume_multiplier: number;
+  speed_multiplier: number;
+  delay_multiplier: number;
+  co2_multiplier: number;
+  weather: string;
+  tag_color: string;
+}
+
+export interface DynamicSubagentStatus {
+  id: string;
+  name: string;
+  role_th: string;
+  role_en: string;
+  type: "vision" | "simulation" | "geospatial" | "llm" | "telemetry" | "orchestrator";
+  status: "IDLE" | "RUNNING" | "COMPLETED" | "STANDBY" | "STREAMING";
+  latency_ms: number;
+  throughput_fps: number;
+  tasks_processed: number;
+  last_output_summary: string;
+  async_worker_id: string;
+  cpu_usage_pct: number;
+  memory_mb: number;
+}
+
+export interface MultiAgentSystemState {
+  primary_orchestrator: {
+    status: string;
+    mode: "DYNAMIC_ASYNC_PARALLEL" | "SEQUENTIAL";
+    supervisor: string;
+    uptime_seconds: number;
+    active_coroutine_count: number;
+  };
+  subagents: DynamicSubagentStatus[];
+  recent_logs: {
+    timestamp: string;
+    agent_id: string;
+    level: "INFO" | "SUCCESS" | "WARN" | "EXEC";
+    message: string;
+  }[];
 }

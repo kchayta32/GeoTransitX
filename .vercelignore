@@ -1,0 +1,38 @@
+﻿# Ignore Large Data & Drone Imagery
+data/
+*.tif
+*.tiff
+*.las
+*.laz
+*.pdf
+*.zip
+*.pt
+*.pth
+
+# Ignore Python Pipeline & Virtual Envs
+python_pipeline/
+models/
+workshops/
+docs/
+run.py
+venv/
+.venv/
+__pycache__/
+*.py
+
+# Dependencies & Build Output
+node_modules/
+web/node_modules/
+.next/
+web/.next/
+out/
+web/out/
+build/
+web/build/
+dist/
+web/dist/
+
+# Git & OS
+.git/
+.DS_Store
+Thumbs.db

@@ -98,6 +98,30 @@ def get_gcps():
     with open(p, "r", encoding="utf-8") as f:
         return json.load(f)
 
+@app.get("/api/landuse")
+def get_landuse():
+    p = PUBLIC_DATA_DIR / "land_use.geojson"
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="Land Use data not found")
+    with open(p, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+@app.get("/api/runway-buffer")
+def get_runway_buffer():
+    p = PUBLIC_DATA_DIR / "runway_buffer.geojson"
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="Runway buffer data not found")
+    with open(p, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+@app.get("/api/runway-sketch")
+def get_runway_sketch():
+    p = PUBLIC_DATA_DIR / "runway_sketch.geojson"
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="Runway sketch data not found")
+    with open(p, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 @app.get("/api/simulation")
 def get_simulation():
     p = PUBLIC_DATA_DIR / "traffic_simulation.json"

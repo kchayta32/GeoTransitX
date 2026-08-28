@@ -1,0 +1,13 @@
+﻿node_modules
+.next
+out
+build
+dist
+.env*.local
+package-lock.json
+*.tif
+*.tiff
+*.las
+*.laz
+*.pdf
+*.zip

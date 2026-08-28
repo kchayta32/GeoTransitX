@@ -35,12 +35,28 @@ def test_endpoints():
     det_count = len(res.json().get("features", []))
     print(f" -> Detections: PASS ({det_count} objects)")
 
+    print("[VERIFY] Testing /api/landuse...")
+    res = requests.get(f"{base_url}/api/landuse")
+    assert res.status_code == 200
+    lu_count = len(res.json().get("features", []))
+    print(f" -> Land Use: PASS ({lu_count} parcels)")
+
+    print("[VERIFY] Testing /api/runway-buffer...")
+    res = requests.get(f"{base_url}/api/runway-buffer")
+    assert res.status_code == 200
+    print(f" -> Runway Buffer: PASS ({len(res.json().get('features', []))} zones)")
+
+    print("[VERIFY] Testing /api/runway-sketch...")
+    res = requests.get(f"{base_url}/api/runway-sketch")
+    assert res.status_code == 200
+    print(f" -> Runway Sketch: PASS ({len(res.json().get('features', []))} centerlines)")
+
     print("[VERIFY] Testing /api/simulation...")
     res = requests.get(f"{base_url}/api/simulation")
     assert res.status_code == 200
     steps = len(res.json().get("timeline", []))
     daily_v = res.json()["kpi_summary"]["daily_total_vehicles"]
-    print(f" -> Simulation: PASS ({steps} time steps, {daily_v} daily vehicles)")
+    print(f" -> 24h Simulation: PASS ({steps} time steps, {daily_v} daily vehicles)")
 
     print("[VERIFY] Testing /api/report...")
     res = requests.get(f"{base_url}/api/report")

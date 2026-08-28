@@ -147,5 +147,70 @@
       100.9551899163034
     ],
     "web_image_url": "/data/orthophoto_web.png"
+  },
+  "webodm_summary": {
+    "land_use_stats": {
+      "total_features": 14,
+      "total_area_sq_m": 28099.2676,
+      "total_area_rai": 17.56,
+      "categories": {
+        "u": {
+          "code": "u",
+          "name_th": "ย่านเมือง พาณิชยกรรม และโครงสร้างพื้นฐาน",
+          "name_en": "Urban & Built-up Land",
+          "color": "#f59e0b",
+          "features_count": 6,
+          "area_sq_m": 2940.35,
+          "area_rai": 1.838,
+          "percentage": 10.46
+        },
+        "a": {
+          "code": "a",
+          "name_th": "พื้นที่เกษตรกรรม (พืช/ปศุสัตว์)",
+          "name_en": "Agricultural Land",
+          "color": "#84cc16",
+          "features_count": 4,
+          "area_sq_m": 3542.43,
+          "area_rai": 2.214,
+          "percentage": 12.61
+        },
+        "f": {
+          "code": "f",
+          "name_th": "ป่าไม้ธรรมชาติ ป่าปลูก และพื้นที่อนุรักษ์",
+          "name_en": "Forest Land",
+          "color": "#10b981",
+          "features_count": 2,
+          "area_sq_m": 6619.46,
+          "area_rai": 4.137,
+          "percentage": 23.56
+        },
+        "w": {
+          "code": "w",
+          "name_th": "แหล่งน้ำ คลอง บึง อ่างเก็บน้ำ",
+          "name_en": "Water Bodies",
+          "color": "#06b6d4",
+          "features_count": 1,
+          "area_sq_m": 4988.81,
+          "area_rai": 3.118,
+          "percentage": 17.75
+        },
+        "m": {
+          "code": "m",
+          "name_th": "พื้นที่เบ็ดเตล็ด / รกร้าง",
+          "name_en": "Miscellaneous Land",
+          "color": "#8b5cf6",
+          "features_count": 1,
+          "area_sq_m": 10008.21,
+          "area_rai": 6.255,
+          "percentage": 35.62
+        }
+      }
+    },
+    "buffer_summary": {
+      "area_sq_m": 145056.179,
+      "length_m": 926.8657,
+      "cost_thb": 261101122.20000002
+    },
+    "survey_marker_count": 65
   }
 }

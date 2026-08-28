@@ -10,10 +10,13 @@ env/
 venv/
 
 # Large raw drone datasets (>100MB for GitHub limits)
+data/raw/*
 *.tif
 *.tiff
 *.las
 *.laz
+
+
 
 # Node / Web
 node_modules/
@@ -32,3 +35,6 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+.vercel
+.env*
